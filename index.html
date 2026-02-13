@@ -4,586 +4,1052 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>VANDORA — Experience Snack Bar</title>
-  <meta name="description" content="VANDORA — El yapımı, temiz içerikli deneyim barı. Her pakette QR sürprizi." />
+  <meta name="description" content="VANDORA Experience Snack Bar — doğal içerikli, el yapımı bar. Her pakette QR ile sürpriz deneyim." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,700;0,800;0,900;1,700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
   <style>
+    /* ═══════════════════════════════════════════
+       VANDORA — v3 WOW Redesign
+       ═══════════════════════════════════════════ */
+
     :root {
-      --green: #2d5a27;
-      --green-light: #3a7a30;
-      --pink: #ff6b9d;
-      --pink-glow: #ff3d7f;
-      --cream: #faf9f7;
+      --green: #1a3a1a;
+      --green-light: #2d6b2d;
+      --green-glow: #4ade80;
+      --pink: #ff3d8a;
+      --pink-soft: #ff6ba8;
+      --pink-glow: #ff9cc5;
+      --cream: #faf8f5;
+      --dark: #0d0d0d;
       --text: #1a1a1a;
-      --muted: #6b7280;
-      --max: 1100px;
+      --muted: #6b6b6b;
+      --white: #ffffff;
+      --glass: rgba(255,255,255,0.06);
+      --glass-border: rgba(255,255,255,0.1);
     }
+
     * { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
-    body { font-family: 'Inter', system-ui, sans-serif; color: var(--text); background: #fff; line-height: 1.6; overflow-x: hidden; }
-    .wrap { width: min(var(--max), calc(100% - 2.4rem)); margin: 0 auto; }
 
-    /* ─── NAV ─── */
-    nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-      background: rgba(255,255,255,0.72);
-      backdrop-filter: blur(20px) saturate(1.6);
-      -webkit-backdrop-filter: blur(20px) saturate(1.6);
-      border-bottom: 1px solid rgba(0,0,0,0.04);
-      transition: box-shadow .3s;
-    }
-    nav.scrolled { box-shadow: 0 4px 30px rgba(0,0,0,0.06); }
-    .nav-inner { display: flex; align-items: center; justify-content: space-between; height: 64px; }
-    .logo { font-family: 'Playfair Display', serif; font-weight: 900; font-size: 1.5rem; color: var(--green); text-decoration: none; letter-spacing: 1px; }
-    .logo span { color: var(--pink); }
-    .nav-links { display: flex; gap: 2rem; list-style: none; }
-    .nav-links a { text-decoration: none; color: var(--text); font-weight: 600; font-size: .88rem; letter-spacing: .3px; position: relative; transition: color .2s; }
-    .nav-links a::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 2px; background: var(--pink); border-radius: 2px; transition: width .25s; }
-    .nav-links a:hover { color: var(--pink); }
-    .nav-links a:hover::after { width: 100%; }
-
-    /* ─── HERO ─── */
-    .hero {
-      min-height: 100vh;
-      display: flex; align-items: center;
-      position: relative;
-      background: var(--green);
-      overflow: hidden;
-    }
-    /* animated gradient mesh */
-    .hero::before {
-      content: '';
-      position: absolute; inset: 0;
-      background:
-        radial-gradient(ellipse 80% 60% at 20% 40%, rgba(58,122,48,.9) 0%, transparent 70%),
-        radial-gradient(ellipse 60% 80% at 80% 30%, rgba(255,107,157,.35) 0%, transparent 60%),
-        radial-gradient(ellipse 50% 50% at 50% 80%, rgba(45,90,39,.95) 0%, transparent 60%);
-      animation: meshMove 12s ease-in-out infinite alternate;
-    }
-    @keyframes meshMove {
-      0% { transform: scale(1) translate(0,0); }
-      50% { transform: scale(1.05) translate(-2%,1%); }
-      100% { transform: scale(1) translate(1%,-1%); }
-    }
-    .hero-content { position: relative; z-index: 2; padding: 8rem 0 5rem; }
-    .hero-tag {
-      display: inline-flex; align-items: center; gap: .5rem;
-      background: rgba(255,255,255,.12);
-      border: 1px solid rgba(255,255,255,.2);
-      border-radius: 999px; padding: .4rem 1rem;
-      color: #ffe3ee; font-size: .82rem; font-weight: 600;
-      backdrop-filter: blur(6px);
-      margin-bottom: 1.5rem;
-      animation: fadeUp .8s ease both;
-    }
-    .hero-tag .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--pink); animation: pulse 2s infinite; }
-    @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: .4; } }
-    .hero h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(2.6rem, 7vw, 5.2rem);
-      font-weight: 900; line-height: 1.02;
-      color: #fff;
-      max-width: 14ch;
-      animation: fadeUp .8s .1s ease both;
-    }
-    .hero h1 em { font-style: italic; color: var(--pink); }
-    .hero-desc {
-      color: rgba(255,255,255,.82); font-size: 1.1rem;
-      max-width: 46ch; margin: 1.2rem 0 2rem;
-      animation: fadeUp .8s .2s ease both;
-    }
-    .hero-btns { display: flex; gap: .8rem; flex-wrap: wrap; animation: fadeUp .8s .3s ease both; }
-    .btn {
-      display: inline-flex; align-items: center; gap: .4rem;
-      padding: .85rem 1.8rem; border-radius: 999px;
-      font-weight: 700; font-size: .92rem; text-decoration: none;
-      border: 2px solid transparent; transition: all .25s ease;
-      cursor: pointer;
-    }
-    .btn-pink { background: var(--pink); color: #fff; box-shadow: 0 8px 30px rgba(255,107,157,.4); }
-    .btn-pink:hover { transform: translateY(-2px); box-shadow: 0 12px 40px rgba(255,107,157,.55); }
-    .btn-glass {
-      background: rgba(255,255,255,.1); color: #fff;
-      border-color: rgba(255,255,255,.25);
-      backdrop-filter: blur(8px);
-    }
-    .btn-glass:hover { background: rgba(255,255,255,.18); }
-
-    @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
-
-    /* ─── GEL BAR (wow element) ─── */
-    .gel-bar-section { padding: 5rem 0; background: var(--cream); position: relative; }
-    .gel-bar-section::before {
-      content: ''; position: absolute; top: -60px; left: 0; right: 0; height: 120px;
-      background: linear-gradient(to bottom, var(--green), var(--cream));
-      pointer-events: none;
-    }
-    .gel-title { text-align: center; margin-bottom: 3rem; }
-    .gel-title h2 { font-family: 'Playfair Display', serif; color: var(--green); font-size: clamp(1.8rem, 4vw, 2.8rem); }
-    .gel-title p { color: var(--muted); max-width: 50ch; margin: .6rem auto 0; }
-
-    .bar-container {
-      max-width: 600px; margin: 0 auto;
-      background: #fff;
-      border-radius: 60px;
-      padding: 8px;
-      box-shadow: 0 20px 60px rgba(45,90,39,.1), inset 0 2px 8px rgba(0,0,0,.04);
-      position: relative;
-      overflow: hidden;
-    }
-    .bar-track {
-      height: 72px;
-      border-radius: 52px;
-      background: linear-gradient(90deg, #f0f0e8, #faf9f7);
-      position: relative;
-      overflow: hidden;
-    }
-    .bar-fill {
-      position: absolute; inset: 4px;
-      border-radius: 48px;
-      background: linear-gradient(90deg, var(--green), var(--green-light), #5cb85c);
-      width: 0%;
-      transition: width 2s cubic-bezier(.22,.68,.36,1);
-      box-shadow: inset 0 -4px 12px rgba(0,0,0,.1), inset 0 4px 8px rgba(255,255,255,.2);
-      display: flex; align-items: center; justify-content: flex-end; padding-right: 16px;
-    }
-    .bar-fill.animate { width: 87%; }
-    /* gel/liquid shine effect */
-    .bar-fill::before {
-      content: '';
-      position: absolute; top: 6px; left: 12px; right: 12px; height: 40%;
-      border-radius: 40px;
-      background: linear-gradient(180deg, rgba(255,255,255,.35) 0%, transparent 100%);
-    }
-    /* bubble particles */
-    .bar-fill::after {
-      content: '';
-      position: absolute;
-      width: 100%; height: 100%;
-      background:
-        radial-gradient(circle 6px at 20% 60%, rgba(255,255,255,.3), transparent),
-        radial-gradient(circle 4px at 45% 35%, rgba(255,255,255,.25), transparent),
-        radial-gradient(circle 8px at 70% 55%, rgba(255,255,255,.2), transparent),
-        radial-gradient(circle 3px at 85% 40%, rgba(255,255,255,.35), transparent);
-      animation: bubbleFloat 4s ease-in-out infinite alternate;
-    }
-    @keyframes bubbleFloat {
-      0% { transform: translateY(0) translateX(0); }
-      100% { transform: translateY(-3px) translateX(4px); }
-    }
-    .bar-label {
-      color: #fff; font-weight: 800; font-size: .85rem;
-      text-shadow: 0 1px 4px rgba(0,0,0,.2);
-      position: relative; z-index: 2;
-      white-space: nowrap;
+    body {
+      font-family: 'Space Grotesk', sans-serif;
+      color: var(--text);
+      background: var(--cream);
+      line-height: 1.6;
+      overflow-x: hidden;
     }
 
-    .ingredients-row {
-      display: flex; justify-content: center; gap: .7rem; flex-wrap: wrap;
-      margin-top: 1.6rem;
-    }
-    .ing-chip {
-      display: inline-flex; align-items: center; gap: .35rem;
-      background: #fff; border: 1.5px solid #e8e6e0;
-      border-radius: 999px; padding: .45rem .9rem;
-      font-size: .82rem; font-weight: 600; color: var(--green);
-      transition: all .25s ease;
-      cursor: default;
-    }
-    .ing-chip:hover {
-      border-color: var(--pink);
-      background: #fff5f8;
-      transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(255,107,157,.15);
-    }
+    .serif { font-family: 'Instrument Serif', serif; }
 
-    /* ─── ÜRÜNLER ─── */
-    .products { padding: 5rem 0; }
-    .section-label {
-      display: inline-block;
-      background: linear-gradient(135deg, #ffe6ef, #ffd1e1);
-      color: #b83268; font-size: .75rem; font-weight: 800;
-      padding: .35rem .8rem; border-radius: 999px;
-      text-transform: uppercase; letter-spacing: .8px;
-      margin-bottom: .8rem;
-    }
-    .products h2 { font-family: 'Playfair Display', serif; color: var(--green); font-size: clamp(1.8rem, 4vw, 2.6rem); margin-bottom: .4rem; }
-    .products .sub { color: var(--muted); margin-bottom: 2.4rem; }
-
-    .product-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.2rem; }
-    .p-card {
-      border-radius: 20px;
-      overflow: hidden;
-      background: #fff;
-      border: 1px solid #f0eeea;
-      position: relative;
-      transition: all .35s ease;
-    }
-    .p-card:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 20px 50px rgba(45,90,39,.12);
-      border-color: transparent;
-    }
-    .p-card-img {
-      position: relative;
-      height: 280px;
-      overflow: hidden;
-    }
-    .p-card-img img { width: 100%; height: 100%; object-fit: cover; transition: transform .5s ease; }
-    .p-card:hover .p-card-img img { transform: scale(1.06); }
-    .p-card-badge {
-      position: absolute; top: 12px; left: 12px;
-      background: rgba(255,255,255,.92);
-      backdrop-filter: blur(8px);
-      border-radius: 999px; padding: .3rem .7rem;
-      font-size: .72rem; font-weight: 700; color: var(--green);
-    }
-    .p-card-body { padding: 1.1rem; }
-    .p-card-body h3 { font-size: 1.05rem; color: var(--green); margin-bottom: .3rem; }
-    .p-card-body p { font-size: .88rem; color: var(--muted); }
-
-    /* ─── QR DENEYİMİ ─── */
-    .qr-section { padding: 5rem 0; }
-    .qr-box {
-      background: linear-gradient(135deg, var(--pink), #d94e90, #b83268);
-      border-radius: 28px;
-      padding: 3rem;
-      color: #fff;
-      position: relative;
-      overflow: hidden;
-    }
-    /* floating circles decoration */
-    .qr-box::before {
-      content: '';
-      position: absolute;
-      width: 300px; height: 300px;
-      border-radius: 50%;
-      background: rgba(255,255,255,.06);
-      top: -80px; right: -60px;
-      animation: floatCircle 8s ease-in-out infinite alternate;
-    }
-    .qr-box::after {
-      content: '';
-      position: absolute;
-      width: 180px; height: 180px;
-      border-radius: 50%;
-      background: rgba(255,255,255,.04);
-      bottom: -40px; left: 10%;
-      animation: floatCircle 6s 1s ease-in-out infinite alternate;
-    }
-    @keyframes floatCircle {
-      0% { transform: translate(0,0) scale(1); }
-      100% { transform: translate(20px,-15px) scale(1.1); }
-    }
-    .qr-inner { position: relative; z-index: 2; display: grid; grid-template-columns: 1.2fr 1fr; gap: 2.5rem; align-items: center; }
-    .qr-box h2 { font-family: 'Playfair Display', serif; font-size: clamp(1.6rem, 3.5vw, 2.4rem); margin-bottom: .6rem; color: #fff; }
-    .qr-box .qr-desc { color: rgba(255,255,255,.85); font-size: 1rem; margin-bottom: 1rem; }
-    .qr-steps { display: flex; flex-direction: column; gap: .7rem; }
-    .qr-step {
-      display: flex; align-items: center; gap: .8rem;
-      background: rgba(255,255,255,.12);
-      border: 1px solid rgba(255,255,255,.18);
-      border-radius: 16px;
-      padding: .9rem 1.1rem;
-      backdrop-filter: blur(6px);
-      transition: all .25s;
-    }
-    .qr-step:hover { background: rgba(255,255,255,.2); transform: translateX(4px); }
-    .step-num {
-      width: 36px; height: 36px; min-width: 36px;
-      border-radius: 50%;
-      background: rgba(255,255,255,.2);
-      display: flex; align-items: center; justify-content: center;
-      font-weight: 800; font-size: .9rem;
-    }
-    .step-text { font-size: .9rem; font-weight: 500; }
-
-    /* ─── HİKAYE ─── */
-    .story-section { padding: 5rem 0; background: var(--cream); }
-    .story-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; }
-    .story-img {
-      border-radius: 24px;
-      overflow: hidden;
-      box-shadow: 0 30px 60px rgba(45,90,39,.12);
-      position: relative;
-    }
-    .story-img img { width: 100%; display: block; }
-    .story-img::after {
-      content: '';
-      position: absolute; inset: 0;
-      border-radius: 24px;
-      border: 3px solid rgba(255,107,157,.2);
-      pointer-events: none;
-    }
-    .story-content h2 { font-family: 'Playfair Display', serif; color: var(--green); font-size: clamp(1.6rem, 3.5vw, 2.4rem); margin-bottom: .8rem; }
-    .story-content p { color: var(--muted); margin-bottom: 1rem; line-height: 1.7; }
-    .story-highlight {
-      display: flex; gap: 1.5rem; margin-top: 1.5rem;
-    }
-    .story-stat {
-      text-align: center;
-      padding: 1rem;
-      background: #fff;
-      border-radius: 16px;
-      border: 1px solid #eee;
-      flex: 1;
-    }
-    .story-stat strong { display: block; font-size: 1.4rem; color: var(--green); }
-    .story-stat span { font-size: .78rem; color: var(--muted); }
-
-    /* ─── CTA / İLETİŞİM ─── */
-    .cta-section { padding: 5rem 0; }
-    .cta-card {
-      text-align: center;
-      border-radius: 28px;
-      padding: 3.5rem 2rem;
-      position: relative;
-      overflow: hidden;
-      background: #fff;
-      border: 1px solid #f0eeea;
-    }
-    .cta-card::before {
-      content: '';
-      position: absolute; inset: 0;
-      background:
-        radial-gradient(circle at 20% 50%, rgba(255,107,157,.06), transparent 50%),
-        radial-gradient(circle at 80% 50%, rgba(45,90,39,.05), transparent 50%);
-    }
-    .cta-card > * { position: relative; z-index: 2; }
-    .cta-card h2 { font-family: 'Playfair Display', serif; color: var(--green); font-size: clamp(1.6rem, 3.5vw, 2.4rem); margin-bottom: .5rem; }
-    .cta-card p { color: var(--muted); max-width: 48ch; margin: 0 auto 1.5rem; }
-    .cta-btns { display: flex; gap: .8rem; justify-content: center; flex-wrap: wrap; }
-    .btn-green { background: var(--green); color: #fff; box-shadow: 0 8px 30px rgba(45,90,39,.25); }
-    .btn-green:hover { transform: translateY(-2px); box-shadow: 0 12px 40px rgba(45,90,39,.35); background: var(--green-light); }
-    .btn-outline { border-color: #e0ddd6; color: var(--text); background: transparent; }
-    .btn-outline:hover { border-color: var(--pink); color: var(--pink); }
-
-    /* ─── FOOTER ─── */
-    footer {
-      background: var(--green);
-      color: rgba(255,255,255,.7);
-      text-align: center;
-      padding: 2rem 1rem;
-    }
-    footer strong { color: #fff; }
-
-    /* ─── SCROLL REVEAL ─── */
+    /* ── Scroll Animations ── */
     .reveal {
       opacity: 0;
-      transform: translateY(30px);
-      transition: opacity .7s ease, transform .7s ease;
+      transform: translateY(40px);
+      transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+                  transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
     }
     .reveal.visible {
       opacity: 1;
       transform: translateY(0);
     }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
 
-    /* ─── RESPONSIVE ─── */
-    @media (max-width: 900px) {
-      .product-grid { grid-template-columns: 1fr 1fr; }
-      .qr-inner, .story-grid { grid-template-columns: 1fr; }
-      .story-img { order: -1; }
+    /* ── Navbar ── */
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      padding: 1rem 0;
+      transition: all 0.4s ease;
     }
-    @media (max-width: 600px) {
-      .nav-links { display: none; }
-      .product-grid { grid-template-columns: 1fr; }
-      .hero h1 { font-size: 2.2rem; }
-      .hero-content { padding: 7rem 0 3rem; }
-      .qr-box { padding: 2rem 1.2rem; }
-      .story-highlight { flex-direction: column; }
+    .navbar.scrolled {
+      background: rgba(13,13,13,0.85);
+      backdrop-filter: blur(20px) saturate(1.8);
+      -webkit-backdrop-filter: blur(20px) saturate(1.8);
+      padding: 0.6rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .navbar .wrap {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .navbar .logo {
+      font-family: 'Instrument Serif', serif;
+      font-size: 1.8rem;
+      color: var(--white);
+      text-decoration: none;
+      letter-spacing: 2px;
+    }
+    .navbar nav { display: flex; gap: 2rem; }
+    .navbar nav a {
+      color: rgba(255,255,255,0.7);
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      transition: color 0.3s;
+    }
+    .navbar nav a:hover { color: var(--pink); }
+
+    /* ── Hero ── */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--dark);
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+    }
+    .hero-bg img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.35;
+    }
+
+    /* Floating gradient blobs */
+    .blob {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      opacity: 0.5;
+      animation: blobFloat 8s ease-in-out infinite alternate;
+      pointer-events: none;
+    }
+    .blob-1 {
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, var(--pink) 0%, transparent 70%);
+      top: -10%; right: -5%;
+      animation-delay: 0s;
+    }
+    .blob-2 {
+      width: 400px; height: 400px;
+      background: radial-gradient(circle, var(--green-glow) 0%, transparent 70%);
+      bottom: -10%; left: -5%;
+      animation-delay: -3s;
+    }
+    .blob-3 {
+      width: 300px; height: 300px;
+      background: radial-gradient(circle, #fbbf24 0%, transparent 70%);
+      top: 40%; left: 30%;
+      animation-delay: -5s;
+      opacity: 0.25;
+    }
+
+    @keyframes blobFloat {
+      0% { transform: translate(0, 0) scale(1); }
+      100% { transform: translate(30px, -20px) scale(1.1); }
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      padding: 0 1.5rem;
+      max-width: 900px;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      background: var(--glass);
+      border: 1px solid var(--glass-border);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      color: var(--pink-glow);
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      padding: 0.5rem 1.4rem;
+      border-radius: 999px;
+      margin-bottom: 2rem;
+    }
+
+    .hero h1 {
+      font-family: 'Instrument Serif', serif;
+      font-size: clamp(3rem, 8vw, 7rem);
+      line-height: 0.95;
+      color: var(--white);
+      margin-bottom: 1.5rem;
+    }
+    .hero h1 .accent {
+      background: linear-gradient(135deg, var(--pink), var(--pink-soft), #fbbf24);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-sub {
+      color: rgba(255,255,255,0.6);
+      font-size: 1.15rem;
+      max-width: 520px;
+      margin: 0 auto 2.5rem;
+    }
+
+    .hero-cta {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.9rem 2rem;
+      border-radius: 999px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.92rem;
+      letter-spacing: 0.5px;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      border: none;
+      cursor: pointer;
+    }
+    .btn-primary {
+      background: linear-gradient(135deg, var(--pink), #e0357a);
+      color: var(--white);
+      box-shadow: 0 8px 30px rgba(255,61,138,0.35);
+    }
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 40px rgba(255,61,138,0.5);
+    }
+    .btn-outline {
+      background: transparent;
+      color: var(--white);
+      border: 1.5px solid rgba(255,255,255,0.25);
+    }
+    .btn-outline:hover {
+      background: rgba(255,255,255,0.08);
+      border-color: rgba(255,255,255,0.5);
+      transform: translateY(-2px);
+    }
+
+    /* Scroll indicator */
+    .scroll-hint {
+      position: absolute;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .scroll-hint span {
+      color: rgba(255,255,255,0.35);
+      font-size: 0.7rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+    }
+    .scroll-line {
+      width: 1px;
+      height: 40px;
+      background: linear-gradient(to bottom, rgba(255,255,255,0.5), transparent);
+      animation: scrollPulse 2s ease-in-out infinite;
+    }
+    @keyframes scrollPulse {
+      0%, 100% { opacity: 0.3; transform: scaleY(0.6); }
+      50% { opacity: 1; transform: scaleY(1); }
+    }
+
+    /* ── Section Common ── */
+    .section {
+      padding: 7rem 0;
+      position: relative;
+    }
+    .wrap {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    .section-label {
+      display: inline-block;
+      color: var(--pink);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+
+    .section-title {
+      font-family: 'Instrument Serif', serif;
+      font-size: clamp(2.2rem, 5vw, 3.6rem);
+      line-height: 1.1;
+      color: var(--green);
+      margin-bottom: 1rem;
+    }
+
+    .section-desc {
+      color: var(--muted);
+      font-size: 1.05rem;
+      max-width: 560px;
+    }
+
+    /* ── Products ── */
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin-top: 3rem;
+    }
+
+    .product-card {
+      background: var(--white);
+      border-radius: 24px;
+      overflow: hidden;
+      border: 1px solid rgba(0,0,0,0.05);
+      transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+      perspective: 1000px;
+    }
+    .product-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 24px 60px rgba(0,0,0,0.1);
+    }
+    .product-card:hover .product-img img {
+      transform: scale(1.08);
+    }
+
+    .product-img {
+      position: relative;
+      overflow: hidden;
+      height: 280px;
+    }
+    .product-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .product-img .overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.4), transparent 50%);
+    }
+
+    .product-body {
+      padding: 1.4rem;
+    }
+    .product-body h3 {
+      font-family: 'Instrument Serif', serif;
+      font-size: 1.3rem;
+      color: var(--green);
+      margin-bottom: 0.5rem;
+    }
+    .product-body p {
+      color: var(--muted);
+      font-size: 0.9rem;
+      margin-bottom: 0.8rem;
+    }
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+    .tag {
+      font-size: 0.72rem;
+      font-weight: 600;
+      padding: 0.3rem 0.7rem;
+      border-radius: 999px;
+      background: linear-gradient(135deg, #f0fdf4, #ecfdf5);
+      color: var(--green-light);
+      border: 1px solid rgba(45,107,45,0.1);
+    }
+
+    /* ── Gel Ingredient Bar (WOW ELEMENT) ── */
+    .gel-section {
+      background: var(--dark);
+      color: var(--white);
+      overflow: hidden;
+      position: relative;
+    }
+    .gel-section::before {
+      content: '';
+      position: absolute;
+      top: -200px;
+      right: -200px;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(255,61,138,0.15), transparent 70%);
+      pointer-events: none;
+    }
+
+    .gel-section .section-title { color: var(--white); }
+    .gel-section .section-label { color: var(--pink-glow); }
+    .gel-section .section-desc { color: rgba(255,255,255,0.5); }
+
+    .gel-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+      margin-top: 3rem;
+    }
+
+    .gel-bars {
+      display: flex;
+      flex-direction: column;
+      gap: 1.4rem;
+    }
+
+    .gel-item label {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      color: rgba(255,255,255,0.85);
+    }
+    .gel-item label span {
+      color: var(--pink-glow);
+      font-size: 0.75rem;
+    }
+
+    .gel-track {
+      position: relative;
+      height: 32px;
+      background: rgba(255,255,255,0.06);
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .gel-fill {
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      bottom: 2px;
+      width: 0;
+      border-radius: 14px;
+      transition: width 1.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+      /* Jelly wobble: the magic ✨ */
+    }
+    .gel-fill.animate {
+      /* Width set by inline style */
+    }
+
+    /* Jelly surface effect */
+    .gel-fill::after {
+      content: '';
+      position: absolute;
+      top: 2px;
+      left: 10%;
+      right: 10%;
+      height: 40%;
+      background: linear-gradient(to bottom, rgba(255,255,255,0.4), transparent);
+      border-radius: 999px;
+      filter: blur(1px);
+    }
+
+    /* Wobble animation on the fill */
+    @keyframes gelWobble {
+      0% { border-radius: 14px; }
+      25% { border-radius: 14px 16px 12px 14px; }
+      50% { border-radius: 12px 14px 16px 12px; }
+      75% { border-radius: 16px 12px 14px 16px; }
+      100% { border-radius: 14px; }
+    }
+    .gel-fill.animate {
+      animation: gelWobble 3s ease-in-out infinite;
+    }
+
+    .gel-fill.hurma { background: linear-gradient(135deg, #92400e, #b45309, #d97706); }
+    .gel-fill.bal { background: linear-gradient(135deg, #fbbf24, #f59e0b, #eab308); }
+    .gel-fill.yulaf { background: linear-gradient(135deg, #d4a574, #c19660, #a87c50); }
+    .gel-fill.kakao { background: linear-gradient(135deg, #78350f, #92400e, #a0522d); }
+    .gel-fill.fistik { background: linear-gradient(135deg, #65a30d, #84cc16, #a3e635); }
+    .gel-fill.pekmez { background: linear-gradient(135deg, #7c2d12, #9a3412, #c2410c); }
+
+    .gel-info {
+      position: relative;
+    }
+    .gel-info-card {
+      background: var(--glass);
+      border: 1px solid var(--glass-border);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-radius: 24px;
+      padding: 2rem;
+    }
+    .gel-info-card h3 {
+      font-family: 'Instrument Serif', serif;
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+    }
+    .gel-info-card p {
+      color: rgba(255,255,255,0.6);
+      font-size: 0.92rem;
+      line-height: 1.7;
+    }
+    .gel-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.8rem;
+      margin-top: 1.5rem;
+    }
+    .gel-stat {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 16px;
+      padding: 1rem;
+      text-align: center;
+    }
+    .gel-stat .num {
+      display: block;
+      font-size: 1.6rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, var(--pink), var(--pink-glow));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .gel-stat .lbl {
+      font-size: 0.72rem;
+      color: rgba(255,255,255,0.4);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-top: 0.3rem;
+      display: block;
+    }
+
+    /* ── Story ── */
+    .story-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+      margin-top: 3rem;
+    }
+
+    .story-img-wrap {
+      position: relative;
+    }
+    .story-img-wrap img {
+      width: 100%;
+      border-radius: 24px;
+      box-shadow: 0 30px 60px rgba(0,0,0,0.1);
+    }
+    .story-img-wrap::before {
+      content: '';
+      position: absolute;
+      inset: -8px;
+      border-radius: 28px;
+      background: linear-gradient(135deg, var(--green-light), var(--pink));
+      z-index: -1;
+      opacity: 0.2;
+    }
+
+    .story-text h3 {
+      font-family: 'Instrument Serif', serif;
+      font-size: 1.5rem;
+      color: var(--green);
+      margin-bottom: 1rem;
+    }
+    .story-text p {
+      color: var(--muted);
+      font-size: 0.95rem;
+      margin-bottom: 1rem;
+    }
+
+    /* ── QR Section ── */
+    .qr-section {
+      background: linear-gradient(135deg, var(--pink), #e0357a, #c0265e);
+      color: var(--white);
+      position: relative;
+      overflow: hidden;
+    }
+    .qr-section::after {
+      content: '';
+      position: absolute;
+      bottom: -100px;
+      left: -100px;
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(255,255,255,0.1), transparent 70%);
+      pointer-events: none;
+    }
+
+    .qr-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    .qr-section .section-label { color: rgba(255,255,255,0.7); }
+    .qr-section .section-title { color: var(--white); }
+
+    .qr-steps {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .qr-step {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.2);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-radius: 16px;
+      padding: 1.2rem;
+      transition: all 0.3s ease;
+    }
+    .qr-step:hover {
+      background: rgba(255,255,255,0.18);
+      transform: translateX(8px);
+    }
+    .qr-step .num {
+      flex-shrink: 0;
+      width: 36px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--white);
+      color: var(--pink);
+      font-weight: 700;
+      border-radius: 12px;
+      font-size: 0.9rem;
+    }
+    .qr-step .txt h4 {
+      font-size: 0.95rem;
+      margin-bottom: 0.2rem;
+    }
+    .qr-step .txt p {
+      font-size: 0.82rem;
+      opacity: 0.75;
+    }
+
+    /* ── CTA ── */
+    .cta-section {
+      text-align: center;
+      padding: 6rem 0;
+      background: var(--white);
+    }
+    .cta-section .section-title {
+      margin-bottom: 1.5rem;
+    }
+    .cta-section p {
+      color: var(--muted);
+      max-width: 480px;
+      margin: 0 auto 2rem;
+    }
+
+    /* ── Footer ── */
+    footer {
+      background: var(--dark);
+      color: rgba(255,255,255,0.4);
+      text-align: center;
+      padding: 2.5rem 1rem;
+      font-size: 0.82rem;
+    }
+    footer .logo-f {
+      font-family: 'Instrument Serif', serif;
+      color: var(--white);
+      font-size: 1.4rem;
+      letter-spacing: 2px;
+      margin-bottom: 0.5rem;
+    }
+    footer a {
+      color: var(--pink-soft);
+      text-decoration: none;
+    }
+    footer a:hover { text-decoration: underline; }
+
+    /* ── Mobile Menu ── */
+    .menu-toggle {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0.5rem;
+    }
+    .menu-toggle span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background: var(--white);
+      margin: 5px 0;
+      border-radius: 2px;
+      transition: all 0.3s;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 960px) {
+      .products-grid { grid-template-columns: 1fr 1fr; }
+      .gel-grid,
+      .story-grid,
+      .qr-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .hero h1 { font-size: clamp(2.4rem, 7vw, 4.5rem); }
+    }
+
+    @media (max-width: 680px) {
+      .navbar nav { display: none; }
+      .menu-toggle { display: block; }
+      .navbar nav.open {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: rgba(13,13,13,0.95);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        padding: 1.5rem;
+        gap: 1rem;
+        border-bottom: 1px solid rgba(255,255,255,0.06);
+      }
+      .products-grid { grid-template-columns: 1fr; }
+      .gel-stats { grid-template-columns: 1fr; }
+      .section { padding: 4.5rem 0; }
+      .blob-1 { width: 300px; height: 300px; }
+      .blob-2 { width: 250px; height: 250px; }
+      .blob-3 { display: none; }
     }
   </style>
 </head>
 <body>
 
-  <!-- NAV -->
-  <nav>
-    <div class="wrap nav-inner">
-      <a class="logo" href="#">VAND<span>O</span>RA</a>
-      <ul class="nav-links">
-        <li><a href="#icerik">İçerik</a></li>
-        <li><a href="#urunler">Ürünler</a></li>
-        <li><a href="#deneyim">QR Deneyimi</a></li>
-        <li><a href="#hikaye">Hikayemiz</a></li>
-        <li><a href="#iletisim">İletişim</a></li>
-      </ul>
+  <!-- ═══ NAVBAR ═══ -->
+  <header class="navbar" id="navbar">
+    <div class="wrap">
+      <a class="logo" href="#">VANDORA</a>
+      <button class="menu-toggle" onclick="document.querySelector('.navbar nav').classList.toggle('open')" aria-label="Menü">
+        <span></span><span></span><span></span>
+      </button>
+      <nav>
+        <a href="#urunler">Ürünler</a>
+        <a href="#icerik">İçerik</a>
+        <a href="#hikayemiz">Hikayemiz</a>
+        <a href="#qr">QR Deneyimi</a>
+        <a href="#iletisim">İletişim</a>
+      </nav>
     </div>
-  </nav>
+  </header>
 
-  <!-- HERO -->
+  <!-- ═══ HERO ═══ -->
   <section class="hero">
-    <div class="wrap hero-content">
-      <div class="hero-tag"><span class="dot"></span> El yapımı · Temiz içerik · QR sürprizi</div>
-      <h1>Atıştırmalığı <em>Deneyime</em> Dönüştürdük</h1>
-      <p class="hero-desc">VANDORA, temiz içerikli barları özel QR sürprizleriyle buluşturan bir deneyim markası. Her pakette bir hikaye var.</p>
-      <div class="hero-btns">
-        <a class="btn btn-pink" href="#urunler">Ürünleri Keşfet</a>
-        <a class="btn btn-glass" href="https://www.instagram.com/vando.raa/" target="_blank" rel="noopener">📸 @vando.raa</a>
+    <div class="hero-bg">
+      <img src="images/hero-ai.jpg" alt="" loading="eager" />
+    </div>
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+
+    <div class="hero-content">
+      <div class="hero-badge reveal">Experience Snack Bar</div>
+      <h1 class="reveal reveal-delay-1">
+        Atıştırmalık<br/>
+        <span class="accent">Deneyime</span> Dönüşür
+      </h1>
+      <p class="hero-sub reveal reveal-delay-2">
+        Doğal içerikli, el yapımı bar. Her pakette QR ile sana özel bir sürpriz. İki mühendis öğrenciden, samimi bir marka.
+      </p>
+      <div class="hero-cta reveal reveal-delay-3">
+        <a class="btn btn-primary" href="#urunler">Ürünleri Keşfet</a>
+        <a class="btn btn-outline" href="https://www.instagram.com/vando.raa/" target="_blank" rel="noopener">📸 @vando.raa</a>
+      </div>
+    </div>
+
+    <div class="scroll-hint">
+      <span>Keşfet</span>
+      <div class="scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- ═══ ÜRÜNLER ═══ -->
+  <section class="section" id="urunler">
+    <div class="wrap">
+      <div class="reveal">
+        <span class="section-label">Ürün Vitrini</span>
+        <h2 class="section-title">Her Bar Bir Hikâye Anlatır</h2>
+        <p class="section-desc">Hurma bazlı, el yapımı, katkı maddesi odaksız. Vintage paket tasarımı, modern raf etkisi.</p>
+      </div>
+
+      <div class="products-grid">
+        <article class="product-card reveal reveal-delay-1">
+          <div class="product-img">
+            <img src="images/vandora-2.jpg" alt="VANDORA El Yapımı Bar" loading="lazy" />
+            <div class="overlay"></div>
+          </div>
+          <div class="product-body">
+            <h3>El Yapımı Bar</h3>
+            <p>Hurma bazlı, dengeli enerji. Her biri özenle elle şekillendirilir.</p>
+            <div class="tags">
+              <span class="tag">40g</span>
+              <span class="tag">144 kcal</span>
+              <span class="tag">El Yapımı</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="product-card reveal reveal-delay-2">
+          <div class="product-img">
+            <img src="images/vandora-3.jpg" alt="VANDORA Ambalaj Tasarımı" loading="lazy" />
+            <div class="overlay"></div>
+          </div>
+          <div class="product-body">
+            <h3>Vintage Paket Kimliği</h3>
+            <p>Nostaljik tasarım, premium his. Sevgililer Günü gibi özel seri paketlere uygun.</p>
+            <div class="tags">
+              <span class="tag">Pembe / Magenta</span>
+              <span class="tag">Vintage Ruh</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="product-card reveal reveal-delay-3">
+          <div class="product-img">
+            <img src="images/vandora-1.jpg" alt="VANDORA Café Deneyimi" loading="lazy" />
+            <div class="overlay"></div>
+          </div>
+          <div class="product-body">
+            <h3>Café Uyumlu</h3>
+            <p>Kahvenin yanında mükemmel eşlikçi. Hızlı ama kaliteli atıştırma.</p>
+            <div class="tags">
+              <span class="tag">Kahve Eşi</span>
+              <span class="tag">Hareket Halinde</span>
+            </div>
+          </div>
+        </article>
       </div>
     </div>
   </section>
 
-  <!-- GEL BAR — İÇERİK ŞEFFAFLIĞI -->
-  <section class="gel-bar-section" id="icerik">
+  <!-- ═══ İÇERİK — JEL BAR (WOW) ═══ -->
+  <section class="section gel-section" id="icerik">
     <div class="wrap">
-      <div class="gel-title reveal">
-        <span class="section-label">İçerik Şeffaflığı</span>
-        <h2>Neyin İçinde Ne Var, Biliyorsun</h2>
-        <p>Karmaşık kimyasallar yok. Anladığın, tanıdığın malzemelerle üretildi.</p>
+      <div class="reveal">
+        <span class="section-label">Şeffaf İçerik</span>
+        <h2 class="section-title">Ne Varsa O, Başka Bir Şey Yok</h2>
+        <p class="section-desc">Karmaşık vaatler yerine net içerik. Her malzeme görünür, her oran bilinir.</p>
       </div>
-      <div class="bar-container reveal">
-        <div class="bar-track">
-          <div class="bar-fill" id="gelBar">
-            <span class="bar-label">%87 Doğal İçerik</span>
+
+      <div class="gel-grid">
+        <div class="gel-bars reveal" id="gelBars">
+          <div class="gel-item">
+            <label>Hurma <span>Ana baz</span></label>
+            <div class="gel-track">
+              <div class="gel-fill hurma" data-width="85%"></div>
+            </div>
+          </div>
+          <div class="gel-item">
+            <label>Yulaf <span>Lif & doygunluk</span></label>
+            <div class="gel-track">
+              <div class="gel-fill yulaf" data-width="68%"></div>
+            </div>
+          </div>
+          <div class="gel-item">
+            <label>Yer Fıstığı <span>Protein</span></label>
+            <div class="gel-track">
+              <div class="gel-fill fistik" data-width="55%"></div>
+            </div>
+          </div>
+          <div class="gel-item">
+            <label>Kakao <span>Antioksidan</span></label>
+            <div class="gel-track">
+              <div class="gel-fill kakao" data-width="42%"></div>
+            </div>
+          </div>
+          <div class="gel-item">
+            <label>Bal <span>Doğal tatlandırıcı</span></label>
+            <div class="gel-track">
+              <div class="gel-fill bal" data-width="35%"></div>
+            </div>
+          </div>
+          <div class="gel-item">
+            <label>Pekmez <span>Mineral deposu</span></label>
+            <div class="gel-track">
+              <div class="gel-fill pekmez" data-width="28%"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="gel-info reveal reveal-delay-2">
+          <div class="gel-info-card">
+            <h3>🍫 Sade Reçete, Dürüst Ürün</h3>
+            <p>
+              VANDORA'nın felsefesi basit: neyi yediğini bil. Katkı maddesi odaksız, el yapımı üretim.
+              Her bar aynı özenle, küçük partiler halinde hazırlanır.
+            </p>
+            <div class="gel-stats">
+              <div class="gel-stat">
+                <span class="num" data-target="144">0</span>
+                <span class="lbl">Kalori</span>
+              </div>
+              <div class="gel-stat">
+                <span class="num" data-target="40">0</span>
+                <span class="lbl">Gram</span>
+              </div>
+              <div class="gel-stat">
+                <span class="num" data-target="6">0</span>
+                <span class="lbl">Malzeme</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-      <div class="ingredients-row reveal">
-        <span class="ing-chip">🌴 Hurma</span>
-        <span class="ing-chip">🍯 Pekmez</span>
-        <span class="ing-chip">🐝 Bal</span>
-        <span class="ing-chip">🌾 Yulaf</span>
-        <span class="ing-chip">🥜 Yer Fıstığı</span>
-        <span class="ing-chip">🍫 Kakao</span>
-      </div>
     </div>
   </section>
 
-  <!-- ÜRÜNLER -->
-  <section class="products" id="urunler">
-    <div class="wrap">
-      <span class="section-label reveal">Ürün Vitrini</span>
-      <h2 class="reveal">Küçük Paket, Büyük Deneyim</h2>
-      <p class="sub reveal">Her biri el yapımı, tek tek paketlenmiş.</p>
-      <div class="product-grid">
-        <article class="p-card reveal">
-          <div class="p-card-img">
-            <img src="images/vandora-2.jpg" alt="Vandora Snack Bar" loading="lazy" />
-            <div class="p-card-badge">40g · 144 kcal</div>
-          </div>
-          <div class="p-card-body">
-            <h3>Klasik Bar</h3>
-            <p>Hurma bazlı, dengeli enerji. Kahve yanına birebir.</p>
-          </div>
-        </article>
-        <article class="p-card reveal">
-          <div class="p-card-img">
-            <img src="images/vandora-3.jpg" alt="Vandora Paket Tasarımı" loading="lazy" />
-            <div class="p-card-badge">Özel Seri</div>
-          </div>
-          <div class="p-card-body">
-            <h3>Vintage Ambalaj</h3>
-            <p>Nostaljik tasarım, modern raf etkisi. Dönemsel seriler için hazır.</p>
-          </div>
-        </article>
-        <article class="p-card reveal">
-          <div class="p-card-img">
-            <img src="images/vandora-1.jpg" alt="Vandora Yaşam Tarzı" loading="lazy" />
-            <div class="p-card-badge">Kafe Dostu</div>
-          </div>
-          <div class="p-card-body">
-            <h3>Kafe Deneyimi</h3>
-            <p>Kahve yanında suçluluk hissi olmayan eşlikçi.</p>
-          </div>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <!-- QR DENEYİMİ -->
-  <section class="qr-section" id="deneyim">
-    <div class="wrap">
-      <div class="qr-box reveal">
-        <div class="qr-inner">
-          <div>
-            <span class="section-label" style="background:rgba(255,255,255,.18); color:#fff;">QR Deneyimi</span>
-            <h2>Her Pakette Bir Dijital Sürpriz</h2>
-            <p class="qr-desc">QR'ı okut, sana özel içeriğe ulaş. Bir bar alıyorsun, bir deneyim yaşıyorsun.</p>
-          </div>
-          <div class="qr-steps">
-            <div class="qr-step">
-              <div class="step-num">1</div>
-              <span class="step-text">Paketteki QR kodu tara</span>
-            </div>
-            <div class="qr-step">
-              <div class="step-num">2</div>
-              <span class="step-text">Sana özel mesajı veya içeriği keşfet</span>
-            </div>
-            <div class="qr-step">
-              <div class="step-num">3</div>
-              <span class="step-text">Instagram'da paylaş, topluluğa katıl</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- HİKAYE -->
-  <section class="story-section" id="hikaye">
+  <!-- ═══ HİKAYEMİZ ═══ -->
+  <section class="section" id="hikayemiz">
     <div class="wrap">
       <div class="story-grid">
-        <div class="story-img reveal">
-          <img src="images/vandora-1.jpg" alt="Vandora Kurucuları" loading="lazy" />
+        <div class="story-img-wrap reveal">
+          <img src="images/ingredients-ai.jpg" alt="VANDORA Doğal Malzemeler" loading="lazy" />
         </div>
-        <div class="story-content reveal">
+        <div class="story-text reveal reveal-delay-2">
           <span class="section-label">Hikayemiz</span>
-          <h2>İki Mühendis Öğrencinin Mutfağından</h2>
-          <p>VANDORA, "sağlıklı atıştırmalık neden sıkıcı olsun?" sorusuyla başladı. Küçük bir mutfak, büyük bir hayal: her barın sadece içeriği değil, paketi bile bir deneyim olsun.</p>
-          <p>Vintage estetik, temiz içerik, dijital sürpriz — hepsini bir barda birleştirdik.</p>
-          <div class="story-highlight">
-            <div class="story-stat"><strong>100%</strong><span>El yapımı</span></div>
-            <div class="story-stat"><strong>1:1</strong><span>Her pakette QR</span></div>
-            <div class="story-stat"><strong>👩🏻‍🎓×2</strong><span>Öğrenci girişimi</span></div>
+          <h2 class="section-title">İki Mühendis Öğrenci, Bir Mutfak</h2>
+          <h3>Sağlıklıyı Keyifli Yapma Hayali</h3>
+          <p>VANDORA, iyi içerikli atıştırmalığı sadece "sağlıklı" değil, aynı zamanda keyifli ve karakterli hale getirmek için kuruldu.</p>
+          <p>Küçük ekip, büyük özen. Her bar el yapımı, her detay deneyim düşünülerek tasarlanmış. Bir mutfakta başlayan bu hikâye, café tezgâhlarına doğru büyüyor.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ QR DENEYİMİ ═══ -->
+  <section class="section qr-section" id="qr">
+    <div class="wrap">
+      <div class="qr-grid">
+        <div class="reveal">
+          <span class="section-label">Dijital Sürpriz</span>
+          <h2 class="section-title">Her Pakette Bir QR,<br/>Her QR'da Bir Deneyim</h2>
+          <p style="color:rgba(255,255,255,0.7); max-width:440px; margin-top:1rem;">
+            Atıştırmalığın ambalajındaki QR kodu tarat — sana özel bir mesaj, içerik veya küçük bir sürpriz keşfet.
+          </p>
+        </div>
+        <div class="qr-steps">
+          <div class="qr-step reveal reveal-delay-1">
+            <div class="num">1</div>
+            <div class="txt">
+              <h4>QR Kodu Tarat</h4>
+              <p>Paketteki kodu telefonunla okut</p>
+            </div>
+          </div>
+          <div class="qr-step reveal reveal-delay-2">
+            <div class="num">2</div>
+            <div class="txt">
+              <h4>Sürprizi Keşfet</h4>
+              <p>Sana özel mesaj veya özel içerik</p>
+            </div>
+          </div>
+          <div class="qr-step reveal reveal-delay-3">
+            <div class="num">3</div>
+            <div class="txt">
+              <h4>Paylaş & Bağlan</h4>
+              <p>Instagram'da paylaş, topluluğa katıl</p>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- İLETİŞİM CTA -->
-  <section class="cta-section" id="iletisim">
+  <!-- ═══ İLETİŞİM CTA ═══ -->
+  <section class="section cta-section" id="iletisim">
     <div class="wrap">
-      <div class="cta-card reveal">
+      <div class="reveal">
         <span class="section-label">İletişim</span>
-        <h2>Birlikte Çalışalım</h2>
-        <p>Kafe, market veya etkinlik iş birlikleri için yazın. Özel paketleme ve dönemsel seriler planlanabilir.</p>
-        <div class="cta-btns">
-          <a class="btn btn-green" href="https://www.instagram.com/vando.raa/" target="_blank" rel="noopener">@vando.raa'ya Yaz</a>
-          <a class="btn btn-outline" href="#">Toplu Sipariş Talebi</a>
+        <h2 class="section-title">Birlikte Çalışalım</h2>
+        <p>Café, butik market veya etkinlik iş birlikleri için DM açık. Özel paketleme ve dönemsel seriler planlanabilir.</p>
+        <div class="hero-cta" style="justify-content:center;">
+          <a class="btn btn-primary" href="https://www.instagram.com/vando.raa/" target="_blank" rel="noopener">📩 @vando.raa</a>
         </div>
       </div>
     </div>
   </section>
 
+  <!-- ═══ FOOTER ═══ -->
   <footer>
-    <p><strong>VANDORA</strong> — Experience Snack Bar &middot; © 2026</p>
-    <small>İki mühendis öğrenciden, samimi ve premium bir atıştırma deneyimi.</small>
+    <div class="logo-f">VANDORA</div>
+    <p>© 2026 VANDORA — Experience Snack Bar</p>
+    <p style="margin-top:0.4rem;">İki mühendis öğrenciden, samimi bir atıştırma deneyimi. <a href="https://www.instagram.com/vando.raa/" target="_blank" rel="noopener">@vando.raa</a></p>
   </footer>
 
+  <!-- ═══ SCRIPTS ═══ -->
   <script>
-    // Nav shadow on scroll
-    const nav = document.querySelector('nav');
-    window.addEventListener('scroll', () => {
-      nav.classList.toggle('scrolled', window.scrollY > 40);
-    }, { passive: true });
-
-    // Scroll reveal
-    const reveals = document.querySelectorAll('.reveal');
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
-    }, { threshold: 0.15 });
-    reveals.forEach(el => io.observe(el));
-
-    // Gel bar animation
-    const gelBar = document.getElementById('gelBar');
-    const gelObs = new IntersectionObserver((entries) => {
-      entries.forEach(e => {
-        if (e.isIntersecting) { gelBar.classList.add('animate'); gelObs.unobserve(e.target); }
+    // ── Scroll Reveal ──
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
       });
-    }, { threshold: 0.5 });
-    gelObs.observe(gelBar);
+    }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+
+    document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+    // ── Navbar Scroll ──
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 60);
+    });
+
+    // ── Gel Bar Animation ──
+    const gelObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const fills = entry.target.querySelectorAll('.gel-fill');
+          fills.forEach((fill, i) => {
+            setTimeout(() => {
+              fill.style.width = fill.dataset.width;
+              fill.classList.add('animate');
+            }, i * 200);
+          });
+
+          // Counter animation
+          document.querySelectorAll('.gel-stat .num').forEach(num => {
+            const target = parseInt(num.dataset.target);
+            const duration = 1500;
+            const start = performance.now();
+
+            function update(now) {
+              const elapsed = now - start;
+              const progress = Math.min(elapsed / duration, 1);
+              // Ease out cubic
+              const eased = 1 - Math.pow(1 - progress, 3);
+              num.textContent = Math.round(target * eased);
+              if (progress < 1) requestAnimationFrame(update);
+            }
+            requestAnimationFrame(update);
+          });
+
+          gelObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.3 });
+
+    const gelBars = document.getElementById('gelBars');
+    if (gelBars) gelObserver.observe(gelBars);
   </script>
 </body>
 </html>
