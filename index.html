@@ -816,6 +816,142 @@
       color: rgba(255,255,255,.35);
     }
 
+    /* ── Unwrap Interactive ── */
+    .unwrap-stage {
+      display: flex;
+      justify-content: center;
+      position: relative;
+      perspective: 800px;
+    }
+    .unwrap-bar {
+      width: 280px;
+      height: 160px;
+      position: relative;
+      cursor: pointer;
+      transform-style: preserve-3d;
+    }
+
+    .uw-wrapper {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, var(--green-mid), var(--green));
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: .4rem;
+      z-index: 2;
+      transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: 0 20px 50px rgba(0,0,0,.4);
+      border: 2px solid rgba(255,255,255,.08);
+      overflow: hidden;
+    }
+    .uw-wrapper::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: repeating-linear-gradient(
+        45deg,
+        transparent,
+        transparent 8px,
+        rgba(255,255,255,.03) 8px,
+        rgba(255,255,255,.03) 16px
+      );
+    }
+    .uw-wrapper:hover {
+      transform: scale(1.03) rotateY(-3deg);
+      box-shadow: 0 24px 60px rgba(0,0,0,.5);
+    }
+
+    .uw-brand {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem;
+      font-weight: 900;
+      color: var(--white);
+      letter-spacing: 3px;
+      position: relative;
+      z-index: 1;
+    }
+    .uw-sub {
+      font-size: .6rem;
+      font-weight: 600;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,.45);
+      position: relative;
+      z-index: 1;
+    }
+    .uw-hint {
+      font-size: .7rem;
+      color: var(--pink-glow);
+      margin-top: .4rem;
+      animation: hintPulse 1.5s ease-in-out infinite;
+      position: relative;
+      z-index: 1;
+    }
+    @keyframes hintPulse {
+      0%,100% { opacity: .5; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.1); }
+    }
+
+    /* Opened state */
+    .unwrap-bar.opened .uw-wrapper {
+      transform: rotateY(-120deg) scale(0.85);
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .uw-inside {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, #1a1a1a, #2a1a22);
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 2px solid rgba(255,255,255,.06);
+      opacity: 0;
+      transform: scale(0.9);
+      transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1) 0.3s;
+    }
+    .unwrap-bar.opened .uw-inside {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    .uw-qr-reveal {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: .5rem;
+    }
+    .uw-msg {
+      font-size: .85rem;
+      color: var(--pink-glow);
+      max-width: 220px;
+      text-align: center;
+      line-height: 1.5;
+    }
+    .uw-again {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .6rem;
+      color: rgba(255,255,255,.3);
+      letter-spacing: 1px;
+      cursor: pointer;
+      transition: color .3s;
+    }
+    .uw-again:hover { color: var(--pink); }
+
+    /* Unwrap confetti */
+    .uw-confetti {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 10;
+      overflow: hidden;
+    }
+
     /* ── CTA ── */
     .cta-sec {
       text-align: center; padding: 7rem 0;
@@ -1015,6 +1151,39 @@
     </div>
   </div>
 
+  <!-- ═══ İNTERAKTİF: VANDORA'NI AÇ (Oreo dunk ilhamı) ═══ -->
+  <section class="sec dark-sec" style="padding:5rem 0;">
+    <div class="wrap" style="text-align:center;">
+      <div class="rv">
+        <span class="label mono-label">İnteraktif Deneyim</span>
+        <h2 class="sec-title text-reveal" style="color:var(--white);">VANDORA'nı Aç</h2>
+        <p class="sec-sub" style="color:rgba(255,255,255,.45);max-width:400px;margin:0 auto 2.5rem;">Pakete tıkla, sürprizi keşfet.</p>
+      </div>
+
+      <div class="unwrap-stage rv d1" id="unwrapStage">
+        <!-- Wrapped bar -->
+        <div class="unwrap-bar" id="unwrapBar" role="button" tabindex="0" aria-label="Paketi aç">
+          <div class="uw-wrapper" id="uwWrapper">
+            <div class="uw-front">
+              <span class="uw-brand">VAND<span style="color:var(--pink)">O</span>RA</span>
+              <span class="uw-sub">Experience Snack Bar</span>
+              <span class="uw-hint">👆 Tıkla</span>
+            </div>
+          </div>
+          <div class="uw-inside" id="uwInside">
+            <div class="uw-qr-reveal">
+              <span style="font-size:2.5rem;">🍫</span>
+              <span class="uw-msg" id="uwMsg"></span>
+              <span class="uw-again" id="uwAgain">↻ Tekrar</span>
+            </div>
+          </div>
+        </div>
+        <!-- Confetti for unwrap -->
+        <div class="uw-confetti" id="uwConfetti"></div>
+      </div>
+    </div>
+  </section>
+
   <!-- HİKAYEMİZ -->
   <section class="sec" id="hikaye">
     <div class="wrap">
@@ -1095,10 +1264,12 @@
       <span class="label mono-label">İletişim</span>
       <h2 class="sec-title text-reveal">Birlikte Çalışalım</h2>
       <p>Café, butik market veya etkinlik iş birlikleri için DM açık. Özel paketleme, kurumsal hediye kutuları ve dönemsel seriler planlanabilir.<br/><span style="font-family:'JetBrains Mono',monospace;font-size:.72rem;color:var(--muted);">32 post · 221+ takipçi · Kadıköy · Bostancı · Bebek, İstanbul</span></p>
-      <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
+      <div style="display:flex;gap:.8rem;justify-content:center;flex-wrap:wrap;margin-bottom:1rem;">
         <a class="btn btn-pink" href="https://www.instagram.com/vando.raa/" target="_blank" rel="noopener">📩 @vando.raa</a>
-        <a class="btn btn-dark" href="#">☕ Toplu Sipariş</a>
+        <a class="btn btn-dark" href="#">🎁 Kurumsal Hediye</a>
+        <a class="btn btn-ghost" style="color:var(--text);border-color:rgba(0,0,0,.12);" href="#">📦 Deneyim Paketi</a>
       </div>
+      <p style="font-size:.78rem;color:var(--muted);max-width:420px;margin:0 auto;">Sevgililer Günü, yılbaşı veya özel etkinlikler için markalı hediye kutuları. Café ve corner market'ler için tezgâh üstü stand.</p>
     </div>
   </section>
 
@@ -1297,6 +1468,52 @@
     }, { threshold: .3 });
     const ph = document.getElementById('phone');
     if (ph) phObs.observe(ph);
+
+    // ── Unwrap Interactive ──
+    const uwBar = document.getElementById('unwrapBar');
+    const uwMsg = document.getElementById('uwMsg');
+    const uwAgain = document.getElementById('uwAgain');
+    const uwConfetti = document.getElementById('uwConfetti');
+    const uwMessages = [
+      '💬 "En sevdiğin çocukluk atıştırmalığı neydi?"',
+      '✨ "Bugün kendine iyi gelen bir şey yaptın mı?"',
+      '☕ "Kahveni nasıl içersin?"',
+      '🌟 "Hayatında en çok kimi takdir ediyorsun?"',
+      '🎯 "Bu ay kendine verdiğin bir söz var mı?"',
+      '💭 "Şu an kafanda dönen tek kelime ne?"',
+      '🌿 "Doğada en çok neyin sesini seviyorsun?"',
+      '🎵 "Seni mutlu eden bir şarkı söyle!"',
+      '📚 "Son okuduğun kitap hangisiydi?"',
+      '🌅 "Gün batımı mı, gün doğumu mu?"',
+    ];
+
+    function openBar() {
+      uwBar.classList.add('opened');
+      uwMsg.textContent = uwMessages[Math.random() * uwMessages.length | 0];
+      uwConfetti.innerHTML = '';
+      const colors = ['#ff2d78','#4ade80','#fbbf24','#7c3aed','#ff8abb','#60a5fa'];
+      for (let i = 0; i < 16; i++) {
+        const c = document.createElement('div');
+        c.className = 'cft';
+        c.style.background = colors[Math.random() * colors.length | 0];
+        c.style.left = '50%'; c.style.top = '50%';
+        c.style.position = 'absolute';
+        const a = Math.PI * 2 * i / 16, d = 80 + Math.random() * 100;
+        c.style.setProperty('--tx', Math.cos(a) * d + 'px');
+        c.style.setProperty('--ty', Math.sin(a) * d + 'px');
+        c.style.width = c.style.height = (5 + Math.random() * 6) + 'px';
+        c.style.borderRadius = Math.random() > .5 ? '50%' : '2px';
+        c.style.animationDelay = Math.random() * .1 + 's';
+        uwConfetti.appendChild(c);
+        requestAnimationFrame(() => c.classList.add('pop'));
+      }
+    }
+    function resetBar() { uwBar.classList.remove('opened'); }
+    if (uwBar) {
+      uwBar.addEventListener('click', () => { if (!uwBar.classList.contains('opened')) openBar(); });
+      uwBar.addEventListener('keypress', e => { if (e.key === 'Enter') openBar(); });
+    }
+    if (uwAgain) uwAgain.addEventListener('click', e => { e.stopPropagation(); resetBar(); });
 
     // ── Phone Tilt ──
     const qrSec = document.getElementById('qr');
