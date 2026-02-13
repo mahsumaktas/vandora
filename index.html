@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VANDORA — Experience Snack Bar</title>
+  <meta name="description" content="VANDORA Experience Snack Bar — clean içerikli, el yapımı bar. Her pakette özel QR deneyimi." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --green: #2d5a27;
+      --pink: #ff6b9d;
+      --white: #ffffff;
+      --cream: #f9f8f6;
+      --text: #1f2937;
+      --muted: #6b7280;
+      --shadow: 0 16px 40px rgba(45, 90, 39, 0.12);
+      --radius: 18px;
+      --max: 1140px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', sans-serif;
+      color: var(--text);
+      background: var(--white);
+      line-height: 1.6;
+    }
+
+    .container { width: min(var(--max), calc(100% - 2rem)); margin: 0 auto; }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 99;
+      backdrop-filter: blur(8px);
+      background: rgba(255,255,255,0.92);
+      border-bottom: 1px solid rgba(0,0,0,0.05);
+    }
+
+    .nav {
+      min-height: 70px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .logo {
+      text-decoration: none;
+      color: var(--green);
+      font-family: 'Playfair Display', serif;
+      font-size: 1.6rem;
+      font-weight: 800;
+      letter-spacing: .5px;
+    }
+
+    .nav ul { list-style: none; display: flex; gap: 1rem; flex-wrap: wrap; justify-content: flex-end; }
+    .nav a.nav-link {
+      text-decoration: none;
+      color: var(--text);
+      font-size: .95rem;
+      font-weight: 600;
+    }
+    .nav a.nav-link:hover { color: var(--pink); }
+
+    .hero {
+      position: relative;
+      min-height: calc(100vh - 70px);
+      display: grid;
+      align-items: center;
+      background:
+        linear-gradient(115deg, rgba(45,90,39,.88), rgba(45,90,39,.6)),
+        url('images/vandora-1.jpg') center/cover no-repeat;
+      color: var(--white);
+      overflow: hidden;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      inset: auto -60px -70px auto;
+      width: 240px;
+      height: 240px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255,107,157,.5), transparent 68%);
+      pointer-events: none;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.15fr .85fr;
+      gap: 2rem;
+      align-items: center;
+      padding: 4.5rem 0;
+    }
+
+    h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.1rem, 6vw, 4.2rem);
+      line-height: 1.05;
+      margin-bottom: 1rem;
+    }
+
+    .tagline {
+      font-weight: 700;
+      color: #ffe3ee;
+      font-size: clamp(1rem, 2.8vw, 1.4rem);
+      margin-bottom: 1rem;
+      letter-spacing: .2px;
+    }
+
+    .lead {
+      max-width: 54ch;
+      color: #fdf7f9;
+      margin-bottom: 1.6rem;
+    }
+
+    .hero-cta { display: flex; gap: .8rem; flex-wrap: wrap; }
+
+    .btn {
+      display: inline-block;
+      padding: .82rem 1.2rem;
+      border-radius: 999px;
+      text-decoration: none;
+      font-weight: 700;
+      border: 2px solid transparent;
+      transition: .2s ease;
+    }
+
+    .btn-primary { background: var(--pink); color: var(--white); }
+    .btn-primary:hover { filter: brightness(.95); transform: translateY(-1px); }
+
+    .btn-ghost { color: var(--white); border-color: rgba(255,255,255,.5); }
+    .btn-ghost:hover { background: rgba(255,255,255,.1); }
+
+    .hero-card {
+      background: rgba(255,255,255,.95);
+      color: var(--text);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 1.2rem;
+    }
+
+    .hero-card h3 { color: var(--green); margin-bottom: .5rem; }
+    .hero-card ul { list-style: none; display: grid; gap: .5rem; }
+    .hero-card li { font-size: .95rem; }
+
+    section { padding: 4.4rem 0; }
+    .section-head { margin-bottom: 2rem; }
+    .kicker {
+      display: inline-block;
+      background: #ffe6ef;
+      color: #b83268;
+      font-size: .8rem;
+      font-weight: 700;
+      padding: .35rem .65rem;
+      border-radius: 999px;
+      margin-bottom: .8rem;
+      text-transform: uppercase;
+      letter-spacing: .5px;
+    }
+
+    h2 {
+      font-family: 'Playfair Display', serif;
+      color: var(--green);
+      font-size: clamp(1.7rem, 4.5vw, 2.8rem);
+      line-height: 1.15;
+      margin-bottom: .55rem;
+    }
+
+    .muted { color: var(--muted); }
+
+    .cards-3 {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1rem;
+    }
+
+    .card {
+      background: var(--white);
+      border: 1px solid #eef1f2;
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: 0 8px 24px rgba(0,0,0,.04);
+    }
+
+    .card img { width: 100%; height: 260px; object-fit: cover; display: block; }
+    .card-body { padding: 1rem; }
+    .card h3 { color: var(--green); margin-bottom: .45rem; }
+
+    .chips { display: flex; flex-wrap: wrap; gap: .45rem; margin-top: .8rem; }
+    .chip {
+      font-size: .77rem;
+      padding: .3rem .6rem;
+      border-radius: 999px;
+      background: #eff9ef;
+      color: var(--green);
+      font-weight: 700;
+    }
+
+    .story {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.2rem;
+      align-items: center;
+    }
+
+    .story img { width: 100%; border-radius: var(--radius); box-shadow: var(--shadow); }
+
+    .qr {
+      background: linear-gradient(130deg, #ff6b9d, #d94e90);
+      color: var(--white);
+      border-radius: 24px;
+      padding: 1.6rem;
+      box-shadow: 0 18px 40px rgba(217,78,144,.25);
+    }
+
+    .qr-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; align-items: center; }
+
+    .qr-step {
+      background: rgba(255,255,255,.18);
+      border: 1px solid rgba(255,255,255,.35);
+      border-radius: 14px;
+      padding: .85rem;
+      margin-top: .65rem;
+      font-size: .92rem;
+    }
+
+    .clean-label {
+      background: var(--cream);
+      border-radius: 24px;
+      padding: 1.3rem;
+      border: 1px solid #f0efec;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: .7rem;
+      margin-top: 1rem;
+    }
+
+    .stat {
+      background: var(--white);
+      border-radius: 14px;
+      padding: .85rem;
+      text-align: center;
+      border: 1px solid #eef1ef;
+    }
+    .stat b { display: block; color: var(--green); font-size: 1.15rem; }
+
+    .cta-block {
+      text-align: center;
+      background: linear-gradient(180deg, #fff, #fff4f8);
+      border: 1px solid #ffd7e7;
+      border-radius: 24px;
+      padding: 1.7rem;
+    }
+
+    footer {
+      background: var(--green);
+      color: #f3f9f2;
+      text-align: center;
+      padding: 1.4rem 1rem;
+      margin-top: 3rem;
+    }
+
+    @media (max-width: 960px) {
+      .hero-grid,
+      .story,
+      .qr-grid { grid-template-columns: 1fr; }
+      .cards-3 { grid-template-columns: 1fr 1fr; }
+      .stats { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 680px) {
+      .nav ul { display: none; }
+      .cards-3 { grid-template-columns: 1fr; }
+      section { padding: 3.4rem 0; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="container nav">
+      <a class="logo" href="#">VANDORA</a>
+      <ul>
+        <li><a class="nav-link" href="#urunler">Ürünler</a></li>
+        <li><a class="nav-link" href="#hikayemiz">Hikayemiz</a></li>
+        <li><a class="nav-link" href="#qr">QR Deneyimi</a></li>
+        <li><a class="nav-link" href="#icerik">İçerik</a></li>
+        <li><a class="nav-link" href="#iletisim">İletişim</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="container hero-grid">
+      <div>
+        <p class="tagline">Experience Snack Bar</p>
+        <h1>VANDORA ile Atıştırma Deneyimini Yeniden Yaşa</h1>
+        <p class="lead">Clean içerikli, handmade bar. Her pakette QR ile mini bir sürpriz. Vintage ruh, modern içerik; café ve coffeshop ritmine uyumlu.</p>
+        <div class="hero-cta">
+          <a class="btn btn-primary" href="#urunler">Ürünü Gör</a>
+          <a class="btn btn-ghost" href="https://www.instagram.com/vando.raa/" target="_blank" rel="noopener">Instagram'a Git</a>
+        </div>
+      </div>
+      <aside class="hero-card">
+        <h3>Quick Facts</h3>
+        <ul>
+          <li>🍫 Her pakette özel QR deneyimi</li>
+          <li>🌾 Clean label: katkı maddesi odaksız</li>
+          <li>👩🏻‍🎓 2 mühendis öğrenci girişimi</li>
+          <li>🎀 Pembe/magenta + yeşil marka kimliği</li>
+          <li>☕ Café/corner satışına uygun premium his</li>
+        </ul>
+      </aside>
+    </div>
+  </section>
+
+  <section id="urunler">
+    <div class="container">
+      <div class="section-head">
+        <span class="kicker">Product Focus</span>
+        <h2>Ürün Vitrini</h2>
+        <p class="muted">İlham: clean layout + bold tipografi + sosyal kanıt yaklaşımı.</p>
+      </div>
+
+      <div class="cards-3">
+        <article class="card">
+          <img src="images/vandora-2.jpg" alt="Vandora Snack Bar" />
+          <div class="card-body">
+            <h3>VANDORA Snack Bar</h3>
+            <p>Hurma bazlı, el yapımı, dengeli enerji.</p>
+            <div class="chips">
+              <span class="chip">40g</span>
+              <span class="chip">144 kcal</span>
+              <span class="chip">Handmade</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="card">
+          <img src="images/vandora-3.jpg" alt="Vandora Ambalaj" />
+          <div class="card-body">
+            <h3>Vintage Paket Kimliği</h3>
+            <p>Nostaljik tasarım, modern raf etkisi. Sevgililer günü gibi özel paket serilerine uygun yapı.</p>
+            <div class="chips">
+              <span class="chip">Pink/Magenta</span>
+              <span class="chip">Vintage Vibe</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="card">
+          <img src="images/vandora-1.jpg" alt="Vandora Lifestyle" />
+          <div class="card-body">
+            <h3>Café-Friendly Deneyim</h3>
+            <p>Kahve yanında guilt-free eşlikçi: hızlı ama iyi içerik.</p>
+            <div class="chips">
+              <span class="chip">Coffee Match</span>
+              <span class="chip">On-the-go</span>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="hikayemiz">
+    <div class="container story">
+      <img src="images/vandora-1.jpg" alt="Vandora Kurucuları" />
+      <div>
+        <span class="kicker">Our Story</span>
+        <h2>İki Mühendis Öğrenciden Doğan Bir Marka</h2>
+        <p class="muted">VANDORA, iyi içerikli atıştırmalığı sadece “sağlıklı” değil, aynı zamanda keyifli ve karakterli hale getirmek için kuruldu. Küçük ekip, büyük özen: her bar el yapımı ve her detay kullanıcı deneyimi düşünülerek tasarlanıyor.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="qr">
+    <div class="container qr">
+      <div class="qr-grid">
+        <div>
+          <span class="kicker" style="background:rgba(255,255,255,.24); color:#fff;">QR Experience</span>
+          <h2 style="color:#fff; margin-top:.5rem;">Atıştırmalığın İçine Dijital Sürpriz Ekledik</h2>
+          <p>Her pakette bulunan özel QR kodu okut: mini mesaj, özel içerik ya da anı hissi. Ürün + deneyim birleşimi.</p>
+        </div>
+        <div>
+          <div class="qr-step"><b>1)</b> Paketi açmadan QR’ı okut.</div>
+          <div class="qr-step"><b>2)</b> Sana özel içeriği keşfet.</div>
+          <div class="qr-step"><b>3)</b> Instagram’da paylaş, topluluğa katıl.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="icerik">
+    <div class="container clean-label">
+      <div class="section-head">
+        <span class="kicker">No-BS Ingredients</span>
+        <h2>İçerik Şeffaflığı (Clean Label)</h2>
+        <p class="muted">İlham: RXBAR yaklaşımı — karmaşık vaatler yerine net içerik. VANDORA’da öne çıkanlar:</p>
+      </div>
+
+      <p><b>İçerik:</b> hurma, pekmez, bal, yulaf, yer fıstığı, kakao</p>
+      <div class="chips" style="margin-top:.7rem;">
+        <span class="chip">Katkı odaksız reçete</span>
+        <span class="chip">Handmade üretim</span>
+        <span class="chip">Şeffaf içerik dili</span>
+      </div>
+
+      <div class="stats">
+        <div class="stat"><b>32+</b><span>Instagram post</span></div>
+        <div class="stat"><b>221+</b><span>Takipçi</span></div>
+        <div class="stat"><b>100%</b><span>Öğrenci girişimi ruhu</span></div>
+        <div class="stat"><b>1 Paket</b><span>1 QR deneyimi</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="iletisim">
+    <div class="container cta-block">
+      <span class="kicker">Let’s Work Together</span>
+      <h2>Sipariş ve İş Birliği</h2>
+      <p class="muted" style="max-width:60ch; margin:0 auto 1rem;">Café, corner market veya etkinlik iş birlikleri için DM açık. Özel paketleme ve dönemsel seriler (örn. Valentine’s Edition) planlanabilir.</p>
+      <div class="hero-cta" style="justify-content:center;">
+        <a class="btn btn-primary" href="https://www.instagram.com/vando.raa/" target="_blank" rel="noopener">@vando.raa ile İletişime Geç</a>
+        <a class="btn" style="border-color:#ffd1e1; color:#9f2758;" href="#">Toplu Sipariş Talebi</a>
+      </div>
+      <p style="margin-top:1rem; font-size:.9rem; color:#7a7f87;">Instagram feed: <a href="https://www.instagram.com/vando.raa/" target="_blank" rel="noopener">instagram.com/vando.raa</a></p>
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2026 VANDORA — Experience Snack Bar</p>
+    <small>İki mühendis öğrenciden, samimi ve premium bir atıştırma deneyimi.</small>
+  </footer>
+</body>
+</html>
