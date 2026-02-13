@@ -747,87 +747,365 @@
       color: #9f1239;
     }
 
-    /* ── QR Section ── */
+    /* ── QR Section — IMMERSIVE ── */
     .qr-section {
-      background: linear-gradient(135deg, var(--pink), #d6266e, #b91c5c);
+      background: var(--dark);
       color: var(--white);
       position: relative;
       overflow: hidden;
-    }
-    .qr-section::before {
-      content: '';
-      position: absolute;
-      top: -150px;
-      right: -150px;
-      width: 500px;
-      height: 500px;
-      background: radial-gradient(circle, rgba(255,255,255,0.08), transparent 70%);
-      pointer-events: none;
-    }
-    .qr-section::after {
-      content: '';
-      position: absolute;
-      bottom: -150px;
-      left: -150px;
-      width: 400px;
-      height: 400px;
-      background: radial-gradient(circle, rgba(255,255,255,0.06), transparent 70%);
-      pointer-events: none;
+      padding: 8rem 0;
     }
 
-    .qr-grid {
+    /* Animated gradient mesh background */
+    .qr-bg-mesh {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .qr-bg-mesh .orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(100px);
+      opacity: 0.3;
+    }
+    .qr-bg-mesh .orb-1 {
+      width: 500px; height: 500px;
+      background: var(--pink);
+      top: -10%; left: -10%;
+      animation: orbDrift 12s ease-in-out infinite alternate;
+    }
+    .qr-bg-mesh .orb-2 {
+      width: 400px; height: 400px;
+      background: #7c3aed;
+      bottom: -10%; right: -10%;
+      animation: orbDrift 15s ease-in-out infinite alternate-reverse;
+    }
+    .qr-bg-mesh .orb-3 {
+      width: 350px; height: 350px;
+      background: var(--green-glow);
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      opacity: 0.15;
+      animation: orbDrift 10s ease-in-out infinite alternate;
+    }
+    @keyframes orbDrift {
+      0% { transform: translate(0, 0) scale(1); }
+      100% { transform: translate(50px, -40px) scale(1.2); }
+    }
+
+    /* Floating QR fragments */
+    .qr-fragments {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
+    .qr-frag {
+      position: absolute;
+      width: 6px; height: 6px;
+      background: rgba(255,255,255,0.08);
+      border-radius: 1px;
+      animation: fragFloat linear infinite;
+    }
+    @keyframes fragFloat {
+      0% { opacity: 0; transform: translateY(100%) rotate(0deg); }
+      10% { opacity: 1; }
+      90% { opacity: 1; }
+      100% { opacity: 0; transform: translateY(-100vh) rotate(180deg); }
+    }
+
+    .qr-layout {
+      position: relative;
+      z-index: 1;
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 4rem;
+      gap: 5rem;
       align-items: center;
     }
 
-    .qr-section .section-label { color: rgba(255,255,255,0.6); }
+    .qr-section .section-label { color: var(--pink-glow); }
     .qr-section .section-title { color: var(--white); }
 
-    .qr-steps {
+    /* Phone Mockup */
+    .phone-mockup {
+      position: relative;
+      width: 280px;
+      height: 560px;
+      margin: 0 auto;
+      background: #1a1a1a;
+      border-radius: 40px;
+      border: 3px solid #333;
+      box-shadow:
+        0 0 0 1px rgba(255,255,255,0.05),
+        0 40px 80px rgba(0,0,0,0.5),
+        inset 0 0 30px rgba(0,0,0,0.3);
+      overflow: hidden;
+    }
+
+    /* Phone notch */
+    .phone-notch {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 120px;
+      height: 28px;
+      background: #1a1a1a;
+      border-radius: 0 0 18px 18px;
+      z-index: 10;
+    }
+    .phone-notch::after {
+      content: '';
+      position: absolute;
+      top: 8px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 6px;
+      background: #333;
+      border-radius: 3px;
+    }
+
+    /* Phone screen */
+    .phone-screen {
+      position: absolute;
+      inset: 8px;
+      border-radius: 32px;
+      background: linear-gradient(180deg, #0f0f0f, #1a0a12);
+      overflow: hidden;
       display: flex;
       flex-direction: column;
+      align-items: center;
+      justify-content: center;
       gap: 1rem;
     }
-    .qr-step {
-      display: flex;
-      align-items: flex-start;
-      gap: 1.2rem;
-      background: rgba(255,255,255,0.1);
-      border: 1px solid rgba(255,255,255,0.15);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border-radius: 18px;
-      padding: 1.3rem;
-      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-      cursor: default;
-    }
-    .qr-step:hover {
-      background: rgba(255,255,255,0.18);
-      transform: translateX(10px);
-      box-shadow: 0 12px 30px rgba(0,0,0,0.15);
-    }
-    .qr-step .num {
-      flex-shrink: 0;
-      width: 40px;
-      height: 40px;
+
+    /* QR Code (CSS art) */
+    .qr-code-wrap {
+      position: relative;
+      width: 160px;
+      height: 160px;
       display: flex;
       align-items: center;
       justify-content: center;
+    }
+
+    .qr-code {
+      width: 140px;
+      height: 140px;
       background: var(--white);
-      color: var(--pink);
-      font-weight: 700;
-      border-radius: 14px;
-      font-size: 0.95rem;
+      border-radius: 12px;
+      padding: 10px;
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      grid-template-rows: repeat(7, 1fr);
+      gap: 2px;
+      position: relative;
+      box-shadow: 0 0 20px rgba(255,61,138,0.2);
     }
-    .qr-step .txt h4 {
-      font-size: 1rem;
-      margin-bottom: 0.25rem;
+    .qr-code .qr-cell {
+      border-radius: 1px;
     }
-    .qr-step .txt p {
-      font-size: 0.82rem;
-      opacity: 0.7;
+    .qr-code .qr-cell.filled {
+      background: var(--dark);
+    }
+    .qr-code .qr-cell.empty {
+      background: transparent;
+    }
+
+    /* Neon glow ring around QR */
+    .qr-code-wrap::before {
+      content: '';
+      position: absolute;
+      inset: -6px;
+      border-radius: 18px;
+      border: 2px solid transparent;
+      background: linear-gradient(135deg, var(--pink), #7c3aed, var(--green-glow), var(--pink)) border-box;
+      -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      animation: qrGlowRotate 3s linear infinite;
+    }
+    @keyframes qrGlowRotate {
+      0% { filter: hue-rotate(0deg); }
+      100% { filter: hue-rotate(360deg); }
+    }
+
+    /* Scan line */
+    .scan-line {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, var(--pink), var(--pink-glow), var(--pink), transparent);
+      border-radius: 2px;
+      box-shadow: 0 0 12px var(--pink), 0 0 30px rgba(255,61,138,0.3);
+      animation: scanMove 2.5s ease-in-out infinite;
+      z-index: 2;
+    }
+    @keyframes scanMove {
+      0%, 100% { top: 0; opacity: 0; }
+      10% { opacity: 1; }
+      50% { top: calc(100% - 3px); opacity: 1; }
+      60% { opacity: 0; }
+    }
+
+    /* Status text under QR */
+    .phone-status {
+      font-size: 0.7rem;
+      color: rgba(255,255,255,0.5);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      animation: statusPulse 2.5s ease-in-out infinite;
+    }
+    @keyframes statusPulse {
+      0%, 60%, 100% { opacity: 0.5; }
+      30% { opacity: 1; color: var(--pink-glow); }
+    }
+
+    /* Confetti burst (triggered by JS) */
+    .confetti-container {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 20;
+      overflow: hidden;
+    }
+    .confetti {
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      border-radius: 1px;
+      opacity: 0;
+    }
+    .confetti.burst {
+      animation: confettiBurst 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+    @keyframes confettiBurst {
+      0% {
+        opacity: 1;
+        transform: translate(0, 0) rotate(0deg) scale(1);
+      }
+      100% {
+        opacity: 0;
+        transform: translate(var(--tx), var(--ty)) rotate(720deg) scale(0.3);
+      }
+    }
+
+    /* Phone float animation */
+    .phone-float {
+      animation: phoneFloat 6s ease-in-out infinite;
+    }
+    @keyframes phoneFloat {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(-12px) rotate(1deg); }
+    }
+
+    /* Right side: steps timeline */
+    .qr-timeline {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      position: relative;
+    }
+
+    /* Vertical connecting line */
+    .qr-timeline::before {
+      content: '';
+      position: absolute;
+      left: 24px;
+      top: 40px;
+      bottom: 40px;
+      width: 2px;
+      background: linear-gradient(to bottom, var(--pink), #7c3aed, var(--green-glow));
+      opacity: 0.3;
+    }
+
+    .qr-tl-step {
+      display: flex;
+      align-items: flex-start;
+      gap: 1.5rem;
+      padding: 1.5rem 0;
+      position: relative;
+      opacity: 0;
+      transform: translateX(30px);
+      transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .qr-tl-step.active {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .qr-tl-icon {
+      flex-shrink: 0;
+      width: 50px;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 16px;
+      font-size: 1.3rem;
+      position: relative;
+      z-index: 1;
+      transition: all 0.4s ease;
+    }
+    .qr-tl-step:nth-child(1) .qr-tl-icon {
+      background: linear-gradient(135deg, rgba(255,61,138,0.2), rgba(255,61,138,0.05));
+      border: 1px solid rgba(255,61,138,0.3);
+      box-shadow: 0 0 20px rgba(255,61,138,0.15);
+    }
+    .qr-tl-step:nth-child(2) .qr-tl-icon {
+      background: linear-gradient(135deg, rgba(124,58,237,0.2), rgba(124,58,237,0.05));
+      border: 1px solid rgba(124,58,237,0.3);
+      box-shadow: 0 0 20px rgba(124,58,237,0.15);
+    }
+    .qr-tl-step:nth-child(3) .qr-tl-icon {
+      background: linear-gradient(135deg, rgba(74,222,128,0.2), rgba(74,222,128,0.05));
+      border: 1px solid rgba(74,222,128,0.3);
+      box-shadow: 0 0 20px rgba(74,222,128,0.15);
+    }
+
+    .qr-tl-step:hover .qr-tl-icon {
+      transform: scale(1.1);
+    }
+
+    .qr-tl-content h4 {
+      font-family: 'Instrument Serif', serif;
+      font-size: 1.25rem;
+      margin-bottom: 0.3rem;
+    }
+    .qr-tl-content p {
+      color: rgba(255,255,255,0.5);
+      font-size: 0.85rem;
+      max-width: 320px;
+    }
+    .qr-tl-content .mini-tag {
+      display: inline-block;
+      margin-top: 0.5rem;
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 0.25rem 0.6rem;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.08);
+      color: rgba(255,255,255,0.4);
+    }
+
+    @media (max-width: 960px) {
+      .qr-layout { grid-template-columns: 1fr; gap: 3rem; }
+      .phone-mockup { width: 240px; height: 480px; }
+      .qr-code { width: 120px; height: 120px; }
+    }
+    @media (max-width: 680px) {
+      .phone-mockup { width: 200px; height: 400px; border-radius: 30px; }
+      .phone-screen { border-radius: 24px; }
+      .phone-notch { width: 90px; height: 22px; border-radius: 0 0 14px 14px; }
+      .qr-code { width: 100px; height: 100px; padding: 6px; }
     }
 
     /* ── CTA ── */
@@ -905,7 +1183,7 @@
       .products-grid { grid-template-columns: 1fr 1fr; }
       .gel-grid,
       .story-grid,
-      .qr-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .qr-layout { grid-template-columns: 1fr; gap: 2.5rem; }
       .hero h1 { font-size: clamp(2.5rem, 7vw, 5rem); }
     }
 
@@ -1185,37 +1463,80 @@
     </div>
   </section>
 
-  <!-- ═══ QR DENEYİMİ ═══ -->
-  <section class="section qr-section" id="qr">
+  <!-- ═══ QR DENEYİMİ — IMMERSIVE ═══ -->
+  <section class="qr-section" id="qr">
+    <!-- Animated background mesh -->
+    <div class="qr-bg-mesh">
+      <div class="orb orb-1"></div>
+      <div class="orb orb-2"></div>
+      <div class="orb orb-3"></div>
+    </div>
+
+    <!-- Floating QR fragments (populated by JS) -->
+    <div class="qr-fragments" id="qrFragments"></div>
+
     <div class="wrap">
-      <div class="qr-grid">
+      <!-- Section header centered -->
+      <div style="text-align:center; margin-bottom:4rem; position:relative; z-index:1;" class="reveal">
+        <span class="section-label">Dijital Sürpriz</span>
+        <h2 class="section-title" style="color:var(--white);">Her Pakette Bir QR,<br/>Her QR'da Bir <span class="accent">Deneyim</span></h2>
+        <p style="color:rgba(255,255,255,0.5); max-width:480px; margin:1rem auto 0;">
+          Atıştırmalığın ambalajındaki QR kodu tarat — sana özel bir mesaj, içerik veya küçük bir sürpriz keşfet.
+        </p>
+      </div>
+
+      <div class="qr-layout">
+        <!-- Left: Phone mockup with animated QR scan -->
         <div class="reveal">
-          <span class="section-label">Dijital Sürpriz</span>
-          <h2 class="section-title">Her Pakette Bir QR,<br/>Her QR'da Bir Deneyim</h2>
-          <p style="color:rgba(255,255,255,0.65); max-width:440px; margin-top:1rem;">
-            Atıştırmalığın ambalajındaki QR kodu tarat — sana özel bir mesaj, içerik veya küçük bir sürpriz keşfet.
-          </p>
+          <div class="phone-mockup phone-float" id="phoneMockup">
+            <div class="phone-notch"></div>
+            <div class="phone-screen">
+              <div class="qr-code-wrap">
+                <!-- Scan line -->
+                <div class="scan-line"></div>
+                <!-- CSS QR Code art -->
+                <div class="qr-code" id="qrCode">
+                  <!-- 7x7 grid of cells (simplified QR pattern) -->
+                  <span class="qr-cell filled"></span><span class="qr-cell filled"></span><span class="qr-cell filled"></span><span class="qr-cell empty"></span><span class="qr-cell filled"></span><span class="qr-cell filled"></span><span class="qr-cell filled"></span>
+                  <span class="qr-cell filled"></span><span class="qr-cell empty"></span><span class="qr-cell filled"></span><span class="qr-cell filled"></span><span class="qr-cell filled"></span><span class="qr-cell empty"></span><span class="qr-cell filled"></span>
+                  <span class="qr-cell filled"></span><span class="qr-cell filled"></span><span class="qr-cell filled"></span><span class="qr-cell empty"></span><span class="qr-cell filled"></span><span class="qr-cell filled"></span><span class="qr-cell filled"></span>
+                  <span class="qr-cell empty"></span><span class="qr-cell filled"></span><span class="qr-cell empty"></span><span class="qr-cell filled"></span><span class="qr-cell empty"></span><span class="qr-cell filled"></span><span class="qr-cell empty"></span>
+                  <span class="qr-cell filled"></span><span class="qr-cell empty"></span><span class="qr-cell filled"></span><span class="qr-cell empty"></span><span class="qr-cell filled"></span><span class="qr-cell empty"></span><span class="qr-cell filled"></span>
+                  <span class="qr-cell filled"></span><span class="qr-cell empty"></span><span class="qr-cell filled"></span><span class="qr-cell filled"></span><span class="qr-cell empty"></span><span class="qr-cell filled"></span><span class="qr-cell filled"></span>
+                  <span class="qr-cell filled"></span><span class="qr-cell filled"></span><span class="qr-cell filled"></span><span class="qr-cell empty"></span><span class="qr-cell filled"></span><span class="qr-cell filled"></span><span class="qr-cell filled"></span>
+                </div>
+                <!-- Confetti container -->
+                <div class="confetti-container" id="confettiBox"></div>
+              </div>
+              <div class="phone-status" id="phoneStatus">Taranıyor...</div>
+            </div>
+          </div>
         </div>
-        <div class="qr-steps">
-          <div class="qr-step reveal reveal-delay-1">
-            <div class="num">1</div>
-            <div class="txt">
+
+        <!-- Right: Timeline steps -->
+        <div class="qr-timeline" id="qrTimeline">
+          <div class="qr-tl-step" data-delay="0">
+            <div class="qr-tl-icon">📱</div>
+            <div class="qr-tl-content">
               <h4>QR Kodu Tarat</h4>
-              <p>Paketteki kodu telefonunla okut</p>
+              <p>Paketteki kodu telefonunla okut. Kamera hemen tanır — özel uygulama gerekmez.</p>
+              <span class="mini-tag">Anında tanıma</span>
             </div>
           </div>
-          <div class="qr-step reveal reveal-delay-2">
-            <div class="num">2</div>
-            <div class="txt">
+          <div class="qr-tl-step" data-delay="200">
+            <div class="qr-tl-icon">🎁</div>
+            <div class="qr-tl-content">
               <h4>Sürprizi Keşfet</h4>
-              <p>Sana özel mesaj veya özel içerik</p>
+              <p>Sana özel bir mesaj, özel içerik veya küçük bir dijital hediye. Her pakette farklı bir deneyim.</p>
+              <span class="mini-tag">Her seferinde farklı</span>
             </div>
           </div>
-          <div class="qr-step reveal reveal-delay-3">
-            <div class="num">3</div>
-            <div class="txt">
+          <div class="qr-tl-step" data-delay="400">
+            <div class="qr-tl-icon">🌐</div>
+            <div class="qr-tl-content">
               <h4>Paylaş & Bağlan</h4>
-              <p>Instagram'da paylaş, topluluğa katıl</p>
+              <p>Deneyimini Instagram'da paylaş, VANDORA topluluğuna katıl. Hikâyeni bizimle birleştir.</p>
+              <span class="mini-tag">@vando.raa</span>
             </div>
           </div>
         </div>
@@ -1391,6 +1712,107 @@
 
     const gelBars = document.getElementById('gelBars');
     if (gelBars) gelObs.observe(gelBars);
+
+    // ── QR Section: Floating fragments ──
+    const fragBox = document.getElementById('qrFragments');
+    if (fragBox) {
+      for (let i = 0; i < 30; i++) {
+        const f = document.createElement('div');
+        f.className = 'qr-frag';
+        f.style.left = Math.random() * 100 + '%';
+        f.style.animationDuration = (8 + Math.random() * 12) + 's';
+        f.style.animationDelay = Math.random() * 8 + 's';
+        f.style.width = (4 + Math.random() * 8) + 'px';
+        f.style.height = f.style.width;
+        if (Math.random() > 0.5) f.style.background = 'rgba(255,61,138,0.12)';
+        fragBox.appendChild(f);
+      }
+    }
+
+    // ── QR Section: Timeline step reveal ──
+    const tlObs = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const steps = entry.target.querySelectorAll('.qr-tl-step');
+          steps.forEach((step, i) => {
+            setTimeout(() => step.classList.add('active'), i * 300);
+          });
+          tlObs.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.2 });
+
+    const qrTl = document.getElementById('qrTimeline');
+    if (qrTl) tlObs.observe(qrTl);
+
+    // ── QR Section: Confetti burst (every ~5s cycle) ──
+    const confettiBox = document.getElementById('confettiBox');
+    const phoneStatus = document.getElementById('phoneStatus');
+    const confettiColors = ['#ff3d8a', '#7c3aed', '#4ade80', '#fbbf24', '#ff6ba8', '#60a5fa'];
+
+    function burstConfetti() {
+      if (!confettiBox) return;
+      // Clear old
+      confettiBox.innerHTML = '';
+
+      // Change status
+      if (phoneStatus) {
+        phoneStatus.textContent = '✓ Keşfedildi!';
+        phoneStatus.style.color = '#4ade80';
+        setTimeout(() => {
+          phoneStatus.textContent = 'Taranıyor...';
+          phoneStatus.style.color = '';
+        }, 2000);
+      }
+
+      for (let i = 0; i < 24; i++) {
+        const c = document.createElement('div');
+        c.className = 'confetti';
+        c.style.background = confettiColors[Math.floor(Math.random() * confettiColors.length)];
+        c.style.left = '50%';
+        c.style.top = '50%';
+        const angle = (Math.PI * 2 * i) / 24;
+        const dist = 60 + Math.random() * 80;
+        c.style.setProperty('--tx', Math.cos(angle) * dist + 'px');
+        c.style.setProperty('--ty', Math.sin(angle) * dist + 'px');
+        c.style.animationDelay = (Math.random() * 0.15) + 's';
+        c.style.borderRadius = Math.random() > 0.5 ? '50%' : '1px';
+        c.style.width = (5 + Math.random() * 6) + 'px';
+        c.style.height = c.style.width;
+        confettiBox.appendChild(c);
+
+        // Trigger animation
+        requestAnimationFrame(() => c.classList.add('burst'));
+      }
+    }
+
+    // Burst on scroll into view, then repeat
+    const phoneObs = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          setTimeout(burstConfetti, 1500);
+          setInterval(burstConfetti, 5000);
+          phoneObs.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.3 });
+
+    const phoneMockup = document.getElementById('phoneMockup');
+    if (phoneMockup) phoneObs.observe(phoneMockup);
+
+    // ── Phone mockup tilt on mouse ──
+    if (phoneMockup) {
+      const qrSection = document.getElementById('qr');
+      qrSection.addEventListener('mousemove', (e) => {
+        const rect = qrSection.getBoundingClientRect();
+        const x = (e.clientX - rect.left) / rect.width - 0.5;
+        const y = (e.clientY - rect.top) / rect.height - 0.5;
+        phoneMockup.style.transform = `translateY(${-12 + y * -10}px) rotateY(${x * 8}deg) rotateX(${y * -5}deg)`;
+      });
+      qrSection.addEventListener('mouseleave', () => {
+        phoneMockup.style.transform = '';
+      });
+    }
   </script>
 </body>
 </html>
