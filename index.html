@@ -7,814 +7,849 @@
   <meta name="description" content="VANDORA — doğal içerikli, el yapımı snack bar. İki kadın mühendis öğrenciden." />
   <meta property="og:title" content="VANDORA — Experience Snack Bar" />
   <meta property="og:description" content="Doğal içerikli, el yapımı snack bar." />
-  <meta property="og:image" content="images/hero-ai.jpg" />
+  <meta property="og:image" content="images/hero-light.jpg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=DM+Sans:ital,opsz,wght@0,9..40,300..800;1,9..40,300..800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,800;0,9..144,900;1,9..144,400;1,9..144,700&display=swap" rel="stylesheet" />
   <style>
-    /* ═══════════════════════════════════════
+    /* ══════════════════════════════════════════════
        VANDORA v7 — Light Theme Overhaul
-       Ilham: Barebells, Misfits, Slosh, Apeel
-       ═══════════════════════════════════════ */
+       Inspired by: Barebells, Misfits, Slosh Seltzer
+       ══════════════════════════════════════════════ */
 
     :root {
-      --cream: #FFF8F1;
-      --cream-alt: #F5EDE3;
       --green: #1a4a2e;
-      --green-mid: #2d7a4a;
-      --green-light: #4ade80;
-      --green-pale: #e8f5e9;
+      --green-mid: #267a42;
+      --green-light: #34d058;
+      --green-pale: #e6f5eb;
       --pink: #FF2D78;
-      --pink-soft: #FFE0EC;
-      --pink-pale: #FFF0F5;
-      --pink-hover: #ff4d8f;
-      --gold: #E8A838;
-      --gold-soft: #FFF3D6;
-      --peach: #FFD5C2;
+      --pink-mid: #ff5a9e;
+      --pink-soft: #fff0f5;
+      --pink-pale: #ffe8f0;
+      --gold: #e8a838;
+      --gold-soft: #fff7e6;
+      --cream: #FFFAF5;
+      --cream-dark: #f5efe8;
+      --white: #ffffff;
       --dark: #1a1a1a;
       --dark-mid: #333;
       --muted: #888;
-      --light-border: rgba(0,0,0,0.06);
-      --white: #ffffff;
+      --light-muted: #bbb;
       --radius: 20px;
       --radius-sm: 12px;
-      --font-display: 'Fraunces', Georgia, serif;
-      --font-body: 'DM Sans', system-ui, sans-serif;
-      --font-mono: 'Space Mono', monospace;
+      --radius-xs: 8px;
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: auto; -webkit-font-smoothing: antialiased; }
+    html { scroll-behavior: auto; /* Lenis handles smooth scroll */ }
+
     body {
-      font-family: var(--font-body);
+      font-family: 'DM Sans', system-ui, -apple-system, sans-serif;
       color: var(--dark);
       background: var(--cream);
       line-height: 1.7;
       overflow-x: hidden;
+      cursor: none;
     }
-
-    /* ── Smooth Scroll (Lenis override) ── */
-    html.lenis, html.lenis body { height: auto; }
-    .lenis.lenis-smooth { scroll-behavior: auto !important; }
 
     /* ── Custom Cursor ── */
-    @media (hover: hover) {
-      body { cursor: none; }
-      .cursor-dot {
-        position: fixed; top: 0; left: 0;
-        width: 8px; height: 8px;
-        background: var(--pink);
-        border-radius: 50%;
-        pointer-events: none;
-        z-index: 99999;
-        mix-blend-mode: difference;
-        transition: transform 0.05s;
-      }
-      .cursor-ring {
-        position: fixed; top: 0; left: 0;
-        width: 40px; height: 40px;
-        border: 1.5px solid var(--pink);
-        border-radius: 50%;
-        pointer-events: none;
-        z-index: 99998;
-        opacity: 0.4;
-        transition: width 0.35s cubic-bezier(0.16,1,0.3,1),
-                    height 0.35s cubic-bezier(0.16,1,0.3,1),
-                    opacity 0.35s;
-      }
-      .cursor-ring.active { width: 64px; height: 64px; opacity: 0.7; }
+    .cursor-dot {
+      position: fixed; top: 0; left: 0;
+      width: 8px; height: 8px;
+      background: var(--pink);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 99999;
+      transition: transform 0.1s;
+      mix-blend-mode: difference;
     }
-    @media (hover: none) {
+    .cursor-ring {
+      position: fixed; top: 0; left: 0;
+      width: 40px; height: 40px;
+      border: 1.5px solid rgba(255,45,120,0.35);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 99998;
+      transition: all 0.18s ease-out;
+    }
+    .cursor-ring.hover {
+      width: 64px; height: 64px;
+      border-color: var(--pink);
+      background: rgba(255,45,120,0.06);
+    }
+    @media (hover: none), (pointer: coarse) {
+      body { cursor: auto; }
       .cursor-dot, .cursor-ring { display: none !important; }
-    }
-
-    /* ── Film Grain ── */
-    body::after {
-      content: ''; position: fixed; inset: 0; z-index: 99990;
-      pointer-events: none; opacity: 0.018;
-      background: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
     }
 
     /* ── Preloader ── */
     .preloader {
-      position: fixed; inset: 0; z-index: 10000;
-      background: var(--cream);
+      position: fixed; inset: 0;
+      background: var(--white);
       display: flex; align-items: center; justify-content: center;
-      transition: opacity 0.6s ease 0.2s, visibility 0s 0.8s;
+      z-index: 10000;
+      transition: opacity 0.6s ease, visibility 0.6s;
     }
-    .preloader.done { opacity: 0; visibility: hidden; }
+    .preloader.done { opacity: 0; visibility: hidden; pointer-events: none; }
     .preloader-text {
-      font-family: var(--font-display);
+      font-family: 'Fraunces', Georgia, serif;
       font-size: clamp(2.5rem, 6vw, 5rem);
       font-weight: 800;
       color: var(--green);
       letter-spacing: 6px;
     }
-    .preloader-text .char {
-      display: inline-block;
-      opacity: 0;
-      transform: translateY(30px);
-      animation: preChar 0.5s cubic-bezier(0.16,1,0.3,1) forwards;
+    .preloader-text .o { color: var(--pink); }
+    .preloader-bar {
+      position: absolute; bottom: 40%;
+      width: 120px; height: 3px;
+      background: var(--cream-dark);
+      border-radius: 3px;
+      overflow: hidden;
     }
-    .preloader-text .pink { color: var(--pink); }
-    @keyframes preChar {
-      to { opacity: 1; transform: none; }
+    .preloader-bar::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: var(--pink);
+      border-radius: 3px;
+      animation: preload 1.2s ease-in-out forwards;
     }
+    @keyframes preload { from { width: 0; } to { width: 100%; } }
 
-    /* ── Utilities ── */
-    .container { max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; }
-    .section { padding: clamp(4rem, 10vw, 8rem) 0; }
-    .text-center { text-align: center; }
-    .text-muted { color: var(--muted); }
-    .text-pink { color: var(--pink); }
-    .text-green { color: var(--green); }
-    .font-display { font-family: var(--font-display); }
-    .font-mono { font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 1.5px; text-transform: uppercase; }
-
-    .tag {
-      display: inline-flex; align-items: center; gap: 0.35rem;
-      padding: 0.35rem 0.85rem; border-radius: 100px;
-      font-size: 0.72rem; font-weight: 600;
-      letter-spacing: 1.2px; text-transform: uppercase;
-    }
-    .tag-pink { background: var(--pink-soft); color: var(--pink); }
-    .tag-green { background: var(--green-pale); color: var(--green); }
-
-    h2 {
-      font-family: var(--font-display);
-      font-size: clamp(2rem, 5vw, 3.5rem);
-      font-weight: 800;
-      line-height: 1.15;
-      margin-bottom: 1rem;
-    }
-    .subtitle {
-      font-size: clamp(1rem, 2.5vw, 1.15rem);
-      color: var(--muted);
-      max-width: 520px;
-      margin: 0 auto;
-    }
-
-    /* ── Reveal Animation Classes ── */
-    .rv {
-      opacity: 0; transform: translateY(40px);
-      transition: opacity 0.9s cubic-bezier(0.16,1,0.3,1),
-                  transform 0.9s cubic-bezier(0.16,1,0.3,1);
-    }
-    .rv.vis { opacity: 1; transform: none; }
-    .d1 { transition-delay: 0.08s; }
-    .d2 { transition-delay: 0.16s; }
-    .d3 { transition-delay: 0.24s; }
-    .d4 { transition-delay: 0.32s; }
-    .d5 { transition-delay: 0.4s; }
-
-    /* ══════════════════════
-       NAVBAR
-       ══════════════════════ */
+    /* ── Navbar ── */
     .navbar {
-      position: fixed; top: 0; left: 0; right: 0;
-      z-index: 900; padding: 1.2rem 0;
+      position: fixed; inset: 0 0 auto 0;
+      z-index: 900;
+      padding: 1.2rem 0;
       transition: all 0.4s ease;
     }
     .navbar.scrolled {
-      background: rgba(255,248,241,0.92);
+      background: rgba(255,255,255,0.92);
       backdrop-filter: blur(20px) saturate(1.4);
       -webkit-backdrop-filter: blur(20px) saturate(1.4);
-      padding: 0.6rem 0;
-      box-shadow: 0 1px 0 var(--light-border);
+      padding: 0.7rem 0;
+      box-shadow: 0 1px 30px rgba(0,0,0,0.05);
     }
     .navbar .inner {
-      max-width: 1200px; margin: 0 auto; padding: 0 1.5rem;
+      max-width: 1200px; margin: 0 auto;
+      padding: 0 2rem;
       display: flex; align-items: center; justify-content: space-between;
     }
-    .logo {
-      font-family: var(--font-display);
-      font-size: 1.6rem; font-weight: 900;
-      text-decoration: none; color: var(--green);
+    .brand-logo {
+      font-family: 'Fraunces', serif;
+      font-size: 1.6rem; font-weight: 800;
+      text-decoration: none;
+      color: var(--green);
       letter-spacing: 3px;
+      transition: opacity 0.3s;
     }
-    .logo .o {
+    .brand-logo:hover { opacity: 0.8; }
+    .brand-logo .o {
       color: var(--pink);
       display: inline-block;
-      transition: transform 0.4s cubic-bezier(0.34,1.56,0.64,1);
+      transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
     }
-    .logo:hover .o { transform: scale(1.3) rotate(-12deg); }
+    .brand-logo:hover .o { transform: scale(1.2) rotate(-8deg); }
 
     .nav-links { display: flex; gap: 2rem; align-items: center; }
     .nav-links a {
-      color: var(--dark-mid); text-decoration: none;
-      font-size: 0.75rem; font-weight: 600;
-      letter-spacing: 1.5px; text-transform: uppercase;
-      position: relative; transition: color 0.25s;
+      color: var(--dark-mid);
+      text-decoration: none;
+      font-size: 0.8rem; font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      transition: color 0.25s;
+      position: relative;
     }
     .nav-links a::after {
       content: ''; position: absolute;
-      bottom: -4px; left: 0; width: 0; height: 2px;
-      background: var(--pink); border-radius: 1px;
-      transition: width 0.35s cubic-bezier(0.16,1,0.3,1);
+      bottom: -4px; left: 0;
+      width: 0; height: 2px;
+      background: var(--pink);
+      border-radius: 2px;
+      transition: width 0.35s cubic-bezier(0.16, 1, 0.3, 1);
     }
-    .nav-links a:hover { color: var(--pink); }
+    .nav-links a:hover { color: var(--green); }
     .nav-links a:hover::after { width: 100%; }
 
     .nav-cta {
-      background: var(--green); color: var(--white) !important;
-      padding: 0.55rem 1.3rem; border-radius: 100px;
-      font-size: 0.72rem !important; letter-spacing: 1.2px !important;
-      transition: background 0.25s, transform 0.25s !important;
+      background: var(--green);
+      color: var(--white) !important;
+      padding: 0.55rem 1.4rem;
+      border-radius: 100px;
+      font-size: 0.75rem !important;
+      letter-spacing: 1px !important;
+      transition: all 0.3s !important;
     }
     .nav-cta::after { display: none !important; }
-    .nav-cta:hover { background: var(--green-mid); transform: scale(1.05); }
+    .nav-cta:hover { background: var(--pink) !important; transform: translateY(-2px); }
 
     .hamburger {
-      display: none; background: none; border: none; cursor: pointer; padding: 0.5rem;
+      display: none; background: none; border: none;
+      cursor: pointer; padding: 0.5rem;
     }
     .hamburger span {
       display: block; width: 22px; height: 2px;
-      background: var(--dark); margin: 5px 0; border-radius: 2px;
-      transition: all 0.3s;
+      background: var(--dark); margin: 5px 0;
+      border-radius: 2px; transition: all 0.3s;
     }
 
-    /* ══════════════════════
-       HERO
-       ══════════════════════ */
+    /* ── HERO ── */
     .hero {
-      position: relative;
       min-height: 100vh;
       display: flex; align-items: center;
-      background: var(--cream);
+      position: relative;
       overflow: hidden;
-      padding-top: 5rem;
+      background: linear-gradient(160deg, var(--white) 0%, var(--cream) 40%, var(--pink-pale) 100%);
     }
-    .hero .container {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 3rem;
-      align-items: center;
-      position: relative;
-      z-index: 2;
-    }
-    .hero-content { max-width: 540px; }
-    .hero-tag { margin-bottom: 1.5rem; }
-    .hero h1 {
-      font-family: var(--font-display);
-      font-size: clamp(2.8rem, 6vw, 4.2rem);
-      font-weight: 900;
-      line-height: 1.08;
-      color: var(--green);
-      margin-bottom: 1.2rem;
-    }
-    .hero h1 .o { color: var(--pink); }
-    .hero h1 .line { display: block; overflow: hidden; }
-    .hero h1 .line-inner {
-      display: block;
-      transform: translateY(110%);
-    }
-    .hero-desc {
-      font-size: 1.1rem; color: var(--muted);
-      margin-bottom: 2rem; max-width: 420px;
-    }
-    .hero-buttons { display: flex; gap: 1rem; align-items: center; flex-wrap: wrap; }
-
-    .btn {
-      display: inline-flex; align-items: center; gap: 0.5rem;
-      padding: 0.85rem 2rem; border-radius: 100px;
-      font-family: var(--font-body);
-      font-size: 0.85rem; font-weight: 600;
-      text-decoration: none; border: none; cursor: pointer;
-      transition: all 0.3s cubic-bezier(0.16,1,0.3,1);
-      letter-spacing: 0.5px;
-    }
-    .btn-primary {
-      background: var(--pink); color: var(--white);
-      box-shadow: 0 4px 20px rgba(255,45,120,0.25);
-    }
-    .btn-primary:hover {
-      background: var(--pink-hover);
-      box-shadow: 0 6px 28px rgba(255,45,120,0.35);
-      transform: translateY(-2px);
-    }
-    .btn-outline {
-      background: transparent; color: var(--dark);
-      border: 1.5px solid var(--dark);
-    }
-    .btn-outline:hover {
-      background: var(--dark); color: var(--white);
-      transform: translateY(-2px);
-    }
-
-    .hero-image {
-      position: relative;
-      display: flex; align-items: center; justify-content: center;
-    }
-    .hero-image img {
-      width: 100%; max-width: 480px;
-      border-radius: var(--radius);
-      box-shadow: 0 30px 80px rgba(0,0,0,0.08);
-    }
-    /* Floating ingredient elements around hero image */
-    .float-el {
-      position: absolute;
-      font-size: 2rem;
-      animation: floatY 4s ease-in-out infinite alternate;
-      pointer-events: none;
-      z-index: 3;
-    }
-    .float-el:nth-child(2) { top: 8%; right: -5%; animation-delay: -0.5s; animation-duration: 3.5s; }
-    .float-el:nth-child(3) { top: 35%; right: -12%; animation-delay: -1s; animation-duration: 4.2s; }
-    .float-el:nth-child(4) { bottom: 15%; right: -8%; animation-delay: -1.5s; animation-duration: 3.8s; }
-    .float-el:nth-child(5) { top: 5%; left: -8%; animation-delay: -2s; animation-duration: 4.5s; }
-    .float-el:nth-child(6) { bottom: 10%; left: -10%; animation-delay: -0.8s; animation-duration: 3.2s; }
-    .float-el:nth-child(7) { bottom: 40%; left: -14%; animation-delay: -1.2s; animation-duration: 4s; }
-    @keyframes floatY {
-      from { transform: translateY(0) rotate(0deg); }
-      to { transform: translateY(-18px) rotate(8deg); }
-    }
-
-    /* Hero background decoration */
     .hero-orb {
       position: absolute; border-radius: 50%;
-      filter: blur(80px); pointer-events: none; opacity: 0.5;
+      filter: blur(80px); pointer-events: none;
     }
     .hero-orb-1 {
       width: 500px; height: 500px;
-      background: var(--pink-soft); top: -10%; right: -5%;
+      background: radial-gradient(circle, rgba(255,45,120,0.12) 0%, transparent 70%);
+      top: -10%; right: -5%;
     }
     .hero-orb-2 {
       width: 400px; height: 400px;
-      background: var(--green-pale); bottom: -15%; left: -5%;
+      background: radial-gradient(circle, rgba(52,208,88,0.1) 0%, transparent 70%);
+      bottom: -15%; left: -8%;
     }
     .hero-orb-3 {
-      width: 250px; height: 250px;
-      background: var(--gold-soft); top: 50%; left: 30%;
+      width: 300px; height: 300px;
+      background: radial-gradient(circle, rgba(232,168,56,0.1) 0%, transparent 70%);
+      top: 40%; left: 50%;
+    }
+    .hero .inner {
+      max-width: 1200px; margin: 0 auto;
+      padding: 8rem 2rem 4rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem; align-items: center;
+      position: relative; z-index: 2;
+    }
+    .hero-content { max-width: 520px; }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: var(--green-pale);
+      color: var(--green);
+      padding: 0.45rem 1rem;
+      border-radius: 100px;
+      font-size: 0.75rem; font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+    }
+    .hero-badge::before { content: '🌿'; }
+    .hero-title {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(2.8rem, 5.5vw, 4.5rem);
+      font-weight: 800;
+      line-height: 1.1;
+      color: var(--green);
+      margin-bottom: 1.2rem;
+    }
+    .hero-title .pink { color: var(--pink); }
+    .hero-title .line {
+      display: block;
+      opacity: 0; transform: translateY(30px);
+    }
+    .hero-desc {
+      font-size: 1.1rem;
+      color: var(--muted);
+      margin-bottom: 2rem;
+      max-width: 420px;
+    }
+    .hero-actions { display: flex; gap: 1rem; align-items: center; flex-wrap: wrap; }
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: var(--pink);
+      color: var(--white);
+      padding: 0.9rem 2rem;
+      border-radius: 100px;
+      font-size: 0.9rem; font-weight: 600;
+      text-decoration: none;
+      transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+      border: none; cursor: pointer;
+    }
+    .btn-primary:hover { transform: translateY(-3px) scale(1.03); box-shadow: 0 12px 30px rgba(255,45,120,0.3); }
+    .btn-outline {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: transparent;
+      color: var(--green);
+      padding: 0.9rem 2rem;
+      border-radius: 100px;
+      font-size: 0.9rem; font-weight: 600;
+      text-decoration: none;
+      border: 2px solid var(--green);
+      transition: all 0.3s;
+      cursor: pointer;
+    }
+    .btn-outline:hover { background: var(--green); color: var(--white); transform: translateY(-2px); }
+
+    .hero-visual {
+      position: relative;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .hero-img-wrapper {
+      position: relative;
+      width: 100%; max-width: 480px;
+    }
+    .hero-img-wrapper img {
+      width: 100%;
+      filter: drop-shadow(0 20px 60px rgba(0,0,0,0.12));
+      transition: transform 0.4s ease;
+    }
+    /* Floating ingredient particles around hero image */
+    .float-item {
+      position: absolute;
+      font-size: 2rem;
+      animation: floatBounce 4s ease-in-out infinite;
+      pointer-events: none;
+      filter: drop-shadow(0 4px 8px rgba(0,0,0,0.1));
+    }
+    .float-item:nth-child(2) { top: 5%; left: -10%; animation-delay: -0.5s; }
+    .float-item:nth-child(3) { top: 15%; right: -8%; animation-delay: -1s; font-size: 1.6rem; }
+    .float-item:nth-child(4) { bottom: 20%; left: -15%; animation-delay: -1.5s; font-size: 1.8rem; }
+    .float-item:nth-child(5) { bottom: 10%; right: -12%; animation-delay: -2s; }
+    .float-item:nth-child(6) { top: 45%; left: -18%; animation-delay: -2.5s; font-size: 1.5rem; }
+    .float-item:nth-child(7) { top: 60%; right: -15%; animation-delay: -3s; font-size: 1.7rem; }
+    @keyframes floatBounce {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(-15px) rotate(8deg); }
     }
 
-    /* ══════════════════════
-       MARQUEE
-       ══════════════════════ */
+    /* ── Stats Strip ── */
+    .stats-strip {
+      background: var(--white);
+      border-top: 1px solid rgba(0,0,0,0.04);
+      border-bottom: 1px solid rgba(0,0,0,0.04);
+      padding: 2.5rem 2rem;
+    }
+    .stats-strip .inner {
+      max-width: 1000px; margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2rem; text-align: center;
+    }
+    .stat-item { }
+    .stat-num {
+      font-family: 'Fraunces', serif;
+      font-size: 2.2rem; font-weight: 800;
+      color: var(--green);
+    }
+    .stat-num .accent { color: var(--pink); }
+    .stat-label {
+      font-size: 0.78rem; color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 1.5px; font-weight: 600;
+      margin-top: 0.3rem;
+    }
+
+    /* ── Marquee ── */
     .marquee-section {
+      overflow: hidden;
       padding: 1.5rem 0;
       background: var(--green);
-      overflow: hidden;
-      position: relative;
     }
     .marquee-track {
-      display: flex; width: max-content;
-      animation: marquee 30s linear infinite;
+      display: flex;
+      animation: marqueeScroll 20s linear infinite;
+      width: max-content;
     }
     .marquee-track.reverse { animation-direction: reverse; }
     .marquee-item {
-      font-family: var(--font-display);
-      font-size: clamp(1rem, 2vw, 1.4rem);
-      font-weight: 700;
-      color: rgba(255,255,255,0.9);
+      font-family: 'Fraunces', serif;
+      font-size: 1.1rem; font-weight: 700;
+      color: rgba(255,255,255,0.85);
       white-space: nowrap;
       padding: 0 2rem;
       letter-spacing: 2px;
     }
-    .marquee-item .sep { color: var(--pink); margin: 0 1.5rem; }
-    @keyframes marquee {
+    .marquee-item .dot {
+      display: inline-block;
+      width: 6px; height: 6px;
+      background: var(--pink);
+      border-radius: 50%;
+      margin: 0 1.5rem;
+      vertical-align: middle;
+    }
+    @keyframes marqueeScroll {
       from { transform: translateX(0); }
       to { transform: translateX(-50%); }
     }
 
-    /* ══════════════════════
-       STORY / HİKAYE
-       ══════════════════════ */
-    .story {
+    /* ── Section Commons ── */
+    .section {
+      padding: 6rem 2rem;
+    }
+    .section .inner {
+      max-width: 1100px; margin: 0 auto;
+    }
+    .section-label {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      font-size: 0.72rem; font-weight: 700;
+      color: var(--pink);
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+    .section-title {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      font-weight: 800;
+      color: var(--green);
+      line-height: 1.15;
+      margin-bottom: 1rem;
+    }
+    .section-desc {
+      font-size: 1.05rem;
+      color: var(--muted);
+      max-width: 520px;
+      margin-bottom: 3rem;
+    }
+
+    /* ── Story Section ── */
+    .story-section {
       background: var(--white);
     }
     .story-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 4rem;
-      align-items: center;
+      gap: 4rem; align-items: center;
     }
-    .story-image {
+    .story-img-wrapper {
       position: relative;
       border-radius: var(--radius);
       overflow: hidden;
     }
-    .story-image img {
+    .story-img-wrapper img {
       width: 100%; display: block;
       border-radius: var(--radius);
     }
-    .story-image::after {
-      content: ''; position: absolute; inset: 0;
-      border: 2px solid var(--pink-soft);
-      border-radius: var(--radius);
-      pointer-events: none;
-    }
-    .story-content { max-width: 480px; }
-    .story-content h2 {
+    .story-img-wrapper .overlay-tag {
+      position: absolute; bottom: 1.5rem; left: 1.5rem;
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(10px);
+      padding: 0.6rem 1.2rem;
+      border-radius: 100px;
+      font-size: 0.78rem; font-weight: 600;
       color: var(--green);
+      letter-spacing: 1px;
     }
-    .story-content h2 em {
-      color: var(--pink);
-      font-style: italic;
+    .story-text .highlight {
+      color: var(--pink); font-weight: 600;
     }
-    .story-text {
+    .story-text p {
       color: var(--dark-mid);
-      margin: 1.5rem 0 2rem;
-      font-size: 1.05rem;
+      font-size: 1.02rem;
+      margin-bottom: 1.5rem;
     }
-
-    /* Stats row */
-    .stats {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1.5rem;
-      margin-top: 2.5rem;
-    }
-    .stat { text-align: center; }
-    .stat-num {
-      font-family: var(--font-display);
-      font-size: 2.2rem;
-      font-weight: 800;
+    .story-quote {
+      font-family: 'Fraunces', serif;
+      font-style: italic;
+      font-size: 1.3rem;
       color: var(--green);
-      line-height: 1;
-    }
-    .stat-label {
-      font-size: 0.75rem;
-      color: var(--muted);
-      margin-top: 0.3rem;
-      letter-spacing: 0.5px;
+      border-left: 3px solid var(--pink);
+      padding-left: 1.5rem;
+      margin: 2rem 0;
     }
 
-    /* ══════════════════════
-       PRODUCTS / ÜRÜNLER
-       ══════════════════════ */
-    .products {
+    /* ── Products Section ── */
+    .products-section {
       background: var(--cream);
     }
-    .products-header {
-      text-align: center;
-      margin-bottom: 3rem;
+    .products-scroll {
+      display: flex; gap: 2rem;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      padding: 1rem 0 2rem;
+      scrollbar-width: none;
     }
-    .products-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1.5rem;
-    }
+    .products-scroll::-webkit-scrollbar { display: none; }
     .product-card {
+      flex: 0 0 320px;
+      scroll-snap-align: start;
       background: var(--white);
       border-radius: var(--radius);
-      padding: 1.5rem;
-      border: 1px solid var(--light-border);
-      transition: all 0.4s cubic-bezier(0.16,1,0.3,1);
+      overflow: hidden;
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
       transform-style: preserve-3d;
       perspective: 800px;
     }
     .product-card:hover {
       transform: translateY(-8px);
-      box-shadow: 0 20px 60px rgba(0,0,0,0.06);
-      border-color: var(--pink-soft);
+      box-shadow: 0 20px 50px rgba(0,0,0,0.08);
     }
     .product-card-img {
-      position: relative;
-      border-radius: var(--radius-sm);
-      overflow: hidden;
-      margin-bottom: 1.2rem;
-      background: var(--cream);
-      aspect-ratio: 4/3;
+      height: 280px; overflow: hidden;
+      background: var(--cream-dark);
+      display: flex; align-items: center; justify-content: center;
+      padding: 1.5rem;
     }
     .product-card-img img {
-      width: 100%; height: 100%;
-      object-fit: cover;
-      transition: transform 0.5s cubic-bezier(0.16,1,0.3,1);
+      max-width: 100%; max-height: 100%;
+      object-fit: contain;
+      transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
     }
     .product-card:hover .product-card-img img {
-      transform: scale(1.06);
+      transform: scale(1.08) rotate(-2deg);
     }
-    .product-flavor-tag {
-      position: absolute; top: 0.75rem; left: 0.75rem;
-      padding: 0.25rem 0.65rem; border-radius: 100px;
-      background: var(--white);
-      font-size: 0.65rem; font-weight: 700;
-      letter-spacing: 1px; text-transform: uppercase;
-      color: var(--pink);
-      box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+    .product-card-body {
+      padding: 1.5rem;
     }
-    .product-card h3 {
-      font-family: var(--font-display);
+    .product-card-body h3 {
+      font-family: 'Fraunces', serif;
       font-size: 1.3rem; font-weight: 700;
-      color: var(--green); margin-bottom: 0.4rem;
+      color: var(--green);
+      margin-bottom: 0.4rem;
     }
-    .product-card p {
-      font-size: 0.9rem; color: var(--muted);
-      line-height: 1.5;
+    .product-card-body p {
+      font-size: 0.88rem;
+      color: var(--muted);
+      margin-bottom: 1rem;
     }
-    .product-card .price-tag {
-      display: inline-block; margin-top: 0.8rem;
-      font-family: var(--font-mono);
-      font-size: 0.7rem; color: var(--pink);
-      letter-spacing: 1px;
+    .product-tag {
+      display: inline-block;
+      background: var(--pink-pale);
+      color: var(--pink);
+      padding: 0.3rem 0.8rem;
+      border-radius: 100px;
+      font-size: 0.7rem; font-weight: 600;
+      letter-spacing: 0.5px;
     }
 
-    /* ══════════════════════
-       INGREDIENTS / İÇERİKLER
-       ══════════════════════ */
-    .ingredients {
+    /* ── Ingredients Section ── */
+    .ingredients-section {
       background: var(--white);
       position: relative;
       overflow: hidden;
     }
-    .ingredients-header {
-      text-align: center;
-      margin-bottom: 3.5rem;
+    .ingredients-section::before {
+      content: '';
+      position: absolute; top: 0; right: 0;
+      width: 400px; height: 400px;
+      background: radial-gradient(circle, rgba(255,45,120,0.05) 0%, transparent 70%);
+      border-radius: 50%;
+      pointer-events: none;
     }
-    .ingredients-visual {
+    .ingredients-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 3rem;
-      align-items: center;
+      gap: 4rem; align-items: center;
     }
-    .ingredients-img {
+    .ingredients-img-wrapper {
       border-radius: var(--radius);
       overflow: hidden;
     }
-    .ingredients-img img {
+    .ingredients-img-wrapper img {
       width: 100%; display: block;
       border-radius: var(--radius);
     }
     .ingredient-list {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 1rem;
+      gap: 1.2rem;
     }
     .ingredient-item {
-      display: flex; align-items: center; gap: 0.75rem;
-      padding: 1rem;
+      display: flex; align-items: center; gap: 0.8rem;
+      padding: 1rem 1.2rem;
       background: var(--cream);
       border-radius: var(--radius-sm);
-      transition: all 0.3s ease;
+      transition: all 0.3s;
     }
     .ingredient-item:hover {
-      background: var(--pink-pale);
-      transform: translateX(4px);
+      background: var(--pink-soft);
+      transform: translateX(6px);
     }
     .ingredient-icon {
-      width: 44px; height: 44px;
-      border-radius: 12px;
+      font-size: 1.5rem;
+      width: 40px; height: 40px;
       display: flex; align-items: center; justify-content: center;
-      font-size: 1.4rem;
       background: var(--white);
+      border-radius: 10px;
       flex-shrink: 0;
     }
-    .ingredient-name {
-      font-weight: 600; font-size: 0.9rem;
+    .ingredient-item h4 {
+      font-size: 0.88rem; font-weight: 600;
       color: var(--dark);
     }
-    .ingredient-detail {
-      font-size: 0.75rem; color: var(--muted);
+    .ingredient-item span {
+      font-size: 0.75rem;
+      color: var(--muted);
     }
 
-    /* ══════════════════════
-       QR SECTION
-       ══════════════════════ */
+    /* ── QR Section ── */
     .qr-section {
-      background: var(--green);
+      background: linear-gradient(135deg, var(--green) 0%, #0d2b18 100%);
       color: var(--white);
       position: relative;
       overflow: hidden;
     }
+    .qr-section::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 30% 50%, rgba(255,45,120,0.08) 0%, transparent 60%);
+      pointer-events: none;
+    }
     .qr-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 4rem;
-      align-items: center;
+      gap: 4rem; align-items: center;
+      position: relative; z-index: 2;
     }
-    .qr-content h2 { color: var(--white); }
-    .qr-content h2 em { color: var(--pink); font-style: italic; }
-    .qr-content p { color: rgba(255,255,255,0.7); margin: 1.5rem 0; font-size: 1.05rem; }
-
-    .qr-steps { list-style: none; margin-top: 2rem; }
+    .qr-content .section-label { color: var(--pink-mid); }
+    .qr-content .section-title { color: var(--white); }
+    .qr-content .section-desc { color: rgba(255,255,255,0.65); }
+    .qr-steps {
+      list-style: none;
+      counter-reset: step;
+    }
     .qr-steps li {
+      counter-increment: step;
       display: flex; align-items: flex-start; gap: 1rem;
-      padding: 1rem 0;
-      border-bottom: 1px solid rgba(255,255,255,0.08);
+      margin-bottom: 1.5rem;
+      padding: 1rem;
+      border-radius: var(--radius-sm);
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+      transition: all 0.3s;
     }
-    .qr-steps li:last-child { border-bottom: none; }
-    .step-num {
-      width: 32px; height: 32px; flex-shrink: 0;
-      background: var(--pink); color: var(--white);
-      border-radius: 50%;
+    .qr-steps li:hover {
+      background: rgba(255,255,255,0.08);
+      transform: translateX(6px);
+    }
+    .qr-steps li::before {
+      content: counter(step);
+      flex-shrink: 0;
+      width: 36px; height: 36px;
       display: flex; align-items: center; justify-content: center;
-      font-family: var(--font-mono); font-size: 0.7rem; font-weight: 700;
+      background: var(--pink);
+      color: var(--white);
+      border-radius: 10px;
+      font-family: 'Fraunces', serif;
+      font-weight: 700; font-size: 1rem;
     }
-    .step-text { font-size: 0.95rem; color: rgba(255,255,255,0.85); }
+    .qr-steps li div h4 {
+      font-size: 0.95rem; font-weight: 600;
+      margin-bottom: 0.2rem;
+    }
+    .qr-steps li div p {
+      font-size: 0.82rem;
+      color: rgba(255,255,255,0.55);
+    }
 
     /* Phone mockup */
     .qr-phone {
       display: flex; justify-content: center;
     }
     .phone-frame {
-      width: 260px;
+      width: 280px;
       background: #111;
-      border-radius: 36px;
+      border-radius: 40px;
       padding: 12px;
-      box-shadow: 0 30px 80px rgba(0,0,0,0.3);
+      box-shadow: 0 30px 80px rgba(0,0,0,0.4);
       position: relative;
     }
     .phone-notch {
-      position: absolute; top: 12px; left: 50%; transform: translateX(-50%);
-      width: 100px; height: 24px;
-      background: #111; border-radius: 0 0 16px 16px;
-      z-index: 2;
+      position: absolute;
+      top: 12px; left: 50%;
+      transform: translateX(-50%);
+      width: 120px; height: 28px;
+      background: #111;
+      border-radius: 0 0 16px 16px;
+      z-index: 5;
     }
     .phone-screen {
-      background: var(--cream);
-      border-radius: 26px;
-      padding: 2.5rem 1.5rem 1.5rem;
-      text-align: center;
-      min-height: 420px;
+      background: var(--white);
+      border-radius: 30px;
+      overflow: hidden;
+      aspect-ratio: 9/19;
       display: flex; flex-direction: column;
       align-items: center; justify-content: center;
-      position: relative;
-      overflow: hidden;
+      padding: 3rem 1.5rem;
+      text-align: center;
     }
-    .phone-screen .qr-box {
-      width: 140px; height: 140px;
-      background: var(--white);
+    .phone-screen .qr-art {
+      width: 120px; height: 120px;
+      background: var(--green);
       border-radius: 16px;
-      display: flex; align-items: center; justify-content: center;
-      margin-bottom: 1.2rem;
-      box-shadow: 0 8px 30px rgba(0,0,0,0.06);
+      display: grid; grid-template-columns: repeat(5,1fr);
+      gap: 3px; padding: 12px;
+      margin-bottom: 1.5rem;
       position: relative;
     }
-    .qr-placeholder {
-      width: 110px; height: 110px;
-      background: 
-        linear-gradient(var(--dark) 3px, transparent 3px) 0 0 / 13px 13px,
-        linear-gradient(90deg, var(--dark) 3px, transparent 3px) 0 0 / 13px 13px;
-      border-radius: 8px;
-      opacity: 0.15;
+    .qr-art span {
+      background: var(--white);
+      border-radius: 2px;
     }
-    .qr-glow {
-      position: absolute; inset: -8px;
-      border-radius: 22px;
-      border: 2px solid var(--pink);
-      opacity: 0;
-      animation: qrPulse 2.5s ease-in-out infinite;
+    .qr-art span:nth-child(odd) { opacity: 0.3; }
+    .qr-art::after {
+      content: 'V';
+      position: absolute; inset: 0;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Fraunces', serif;
+      font-size: 2rem; font-weight: 900;
+      color: var(--pink);
     }
-    @keyframes qrPulse {
-      0%, 100% { opacity: 0; transform: scale(1); }
-      50% { opacity: 0.6; transform: scale(1.05); }
-    }
-    .phone-screen .qr-text {
-      font-family: var(--font-display);
+    .phone-screen h5 {
+      font-family: 'Fraunces', serif;
       font-size: 1rem; font-weight: 700;
       color: var(--green);
+      margin-bottom: 0.3rem;
     }
-    .phone-screen .qr-sub {
-      font-size: 0.75rem; color: var(--muted);
-      margin-top: 0.3rem;
+    .phone-screen p {
+      font-size: 0.72rem;
+      color: var(--muted);
     }
     .scan-line {
-      position: absolute; left: 1.5rem; right: 1.5rem;
-      height: 2px; background: var(--pink);
-      opacity: 0.5; border-radius: 2px;
+      position: absolute;
+      width: 80%; height: 2px; left: 10%;
+      background: linear-gradient(90deg, transparent, var(--pink), transparent);
+      border-radius: 2px;
       animation: scanMove 2.5s ease-in-out infinite;
     }
     @keyframes scanMove {
       0%, 100% { top: 30%; opacity: 0; }
-      10% { opacity: 0.6; }
-      50% { top: 65%; opacity: 0.6; }
+      10% { opacity: 1; }
+      50% { top: 70%; opacity: 1; }
       60% { opacity: 0; }
     }
 
-    /* ══════════════════════
-       INSTAGRAM CTA
-       ══════════════════════ */
+    /* ── Instagram CTA ── */
     .ig-section {
       background: var(--cream);
       text-align: center;
     }
-    .ig-section h2 { color: var(--green); }
-    .ig-section h2 em { color: var(--pink); font-style: italic; }
+    .ig-section .section-title { margin-left: auto; margin-right: auto; }
+    .ig-section .section-desc { margin-left: auto; margin-right: auto; }
     .ig-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       gap: 1rem;
-      margin-top: 2.5rem;
-      margin-bottom: 2.5rem;
+      margin-top: 2rem;
     }
     .ig-item {
       aspect-ratio: 1;
       border-radius: var(--radius-sm);
       overflow: hidden;
       position: relative;
-      cursor: pointer;
+      background: var(--cream-dark);
     }
     .ig-item img {
       width: 100%; height: 100%;
       object-fit: cover;
-      transition: transform 0.5s cubic-bezier(0.16,1,0.3,1);
+      transition: transform 0.5s;
     }
-    .ig-item:hover img { transform: scale(1.1); }
+    .ig-item:hover img { transform: scale(1.08); }
     .ig-item::after {
-      content: '📸'; position: absolute; inset: 0;
-      background: rgba(0,0,0,0.3);
+      content: '@vando.raa';
+      position: absolute; inset: 0;
       display: flex; align-items: center; justify-content: center;
-      font-size: 1.5rem;
-      opacity: 0; transition: opacity 0.3s;
+      background: rgba(26,74,46,0.7);
+      color: var(--white);
+      font-size: 0.8rem; font-weight: 600;
+      letter-spacing: 1px;
+      opacity: 0;
+      transition: opacity 0.3s;
     }
     .ig-item:hover::after { opacity: 1; }
-
-    .ig-handle {
-      font-family: var(--font-display);
-      font-size: 1.2rem; font-weight: 700;
-      color: var(--pink);
+    .ig-follow {
+      display: inline-flex; align-items: center; gap: 0.6rem;
+      margin-top: 2.5rem;
+      background: linear-gradient(135deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+      color: var(--white);
+      padding: 0.85rem 2.2rem;
+      border-radius: 100px;
+      font-size: 0.9rem; font-weight: 600;
       text-decoration: none;
+      transition: all 0.35s;
     }
-    .ig-handle:hover { text-decoration: underline; }
+    .ig-follow:hover { transform: translateY(-3px); box-shadow: 0 12px 30px rgba(220,39,67,0.3); }
 
-    /* ══════════════════════
-       FOOTER
-       ══════════════════════ */
-    footer {
+    /* ── Footer ── */
+    .footer {
       background: var(--dark);
-      color: rgba(255,255,255,0.7);
-      padding: 3rem 0 2rem;
+      color: rgba(255,255,255,0.6);
+      padding: 4rem 2rem 2rem;
+    }
+    .footer .inner {
+      max-width: 1100px; margin: 0 auto;
     }
     .footer-grid {
       display: grid;
-      grid-template-columns: 2fr 1fr 1fr;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
       gap: 3rem;
-      margin-bottom: 2.5rem;
+      margin-bottom: 3rem;
     }
-    .footer-brand {
-      font-family: var(--font-display);
-      font-size: 1.5rem; font-weight: 900;
-      color: var(--white); letter-spacing: 3px;
-      margin-bottom: 0.8rem;
+    .footer-brand .brand-logo { color: var(--white); }
+    .footer-brand p {
+      font-size: 0.88rem;
+      margin-top: 1rem;
+      line-height: 1.7;
     }
-    .footer-brand .o { color: var(--pink); }
-    .footer-desc { font-size: 0.9rem; max-width: 300px; line-height: 1.6; }
     .footer h4 {
-      font-family: var(--font-body);
-      font-size: 0.72rem; font-weight: 700;
-      letter-spacing: 2px; text-transform: uppercase;
-      color: var(--white); margin-bottom: 1rem;
+      color: var(--white);
+      font-size: 0.8rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+      font-weight: 600;
     }
-    footer a {
+    .footer ul { list-style: none; }
+    .footer ul li { margin-bottom: 0.6rem; }
+    .footer ul a {
       color: rgba(255,255,255,0.5);
-      text-decoration: none; font-size: 0.9rem;
-      transition: color 0.25s;
-      display: block; margin-bottom: 0.5rem;
+      text-decoration: none;
+      font-size: 0.88rem;
+      transition: color 0.2s;
     }
-    footer a:hover { color: var(--pink); }
+    .footer ul a:hover { color: var(--pink); }
     .footer-bottom {
-      border-top: 1px solid rgba(255,255,255,0.06);
+      border-top: 1px solid rgba(255,255,255,0.08);
       padding-top: 1.5rem;
       display: flex; justify-content: space-between; align-items: center;
       font-size: 0.78rem;
     }
-    .footer-bottom a { display: inline; margin: 0; }
+    .footer-bottom .hearts { color: var(--pink); }
 
-    /* ══════════════════════
-       MOBILE
-       ══════════════════════ */
-    @media (max-width: 768px) {
-      .hero .container { grid-template-columns: 1fr; text-align: center; }
-      .hero-content { max-width: 100%; }
+    /* ── Scroll Reveal (GSAP powered) ── */
+    .reveal { opacity: 0; transform: translateY(40px); }
+    .reveal-left { opacity: 0; transform: translateX(-40px); }
+    .reveal-right { opacity: 0; transform: translateX(40px); }
+    .reveal-scale { opacity: 0; transform: scale(0.9); }
+
+    /* ── Mobile Responsive ── */
+    @media (max-width: 900px) {
+      .hero .inner { grid-template-columns: 1fr; text-align: center; padding-top: 7rem; }
+      .hero-content { max-width: 100%; margin: 0 auto; }
       .hero-desc { margin-left: auto; margin-right: auto; }
-      .hero-buttons { justify-content: center; }
-      .hero-image { order: -1; }
-      .hero-image img { max-width: 320px; }
-      .float-el { display: none; }
+      .hero-actions { justify-content: center; }
+      .hero-visual { order: -1; }
+      .hero-img-wrapper { max-width: 320px; margin: 0 auto; }
+      .float-item { font-size: 1.3rem !important; }
+
+      .stats-strip .inner { grid-template-columns: repeat(2, 1fr); }
 
       .nav-links { display: none; }
       .hamburger { display: block; }
-      .nav-links.open {
-        display: flex; flex-direction: column;
-        position: absolute; top: 100%; left: 0; right: 0;
-        background: var(--white);
-        padding: 1.5rem;
-        box-shadow: 0 10px 40px rgba(0,0,0,0.08);
-        border-radius: 0 0 var(--radius-sm) var(--radius-sm);
-      }
 
-      .story-grid { grid-template-columns: 1fr; gap: 2rem; }
-      .products-grid { grid-template-columns: 1fr; }
-      .ingredients-visual { grid-template-columns: 1fr; }
-      .ingredient-list { grid-template-columns: 1fr; }
-      .qr-grid { grid-template-columns: 1fr; }
+      .story-grid,
+      .ingredients-grid,
+      .qr-grid { grid-template-columns: 1fr; gap: 2rem; }
+
       .ig-grid { grid-template-columns: repeat(2, 1fr); }
-      .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
-      .footer-bottom { flex-direction: column; gap: 0.5rem; text-align: center; }
-      .stats { grid-template-columns: repeat(3, 1fr); gap: 1rem; }
-      .stat-num { font-size: 1.6rem; }
-    }
 
-    /* ══════════════════════
-       ANIMATIONS (GSAP targets)
-       ══════════════════════ */
-    .split-char {
-      display: inline-block;
-      opacity: 0;
-      transform: translateY(100%);
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+      .footer-bottom { flex-direction: column; gap: 0.5rem; text-align: center; }
+
+      .ingredient-list { grid-template-columns: 1fr; }
     }
-    .parallax-img {
-      will-change: transform;
+    @media (max-width: 480px) {
+      .hero-title { font-size: 2.2rem; }
+      .stats-strip .inner { grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+      .product-card { flex: 0 0 280px; }
     }
   </style>
 </head>
@@ -822,23 +857,24 @@
 
   <!-- Preloader -->
   <div class="preloader" id="preloader">
-    <div class="preloader-text" id="preloaderText"></div>
+    <div class="preloader-text">VAND<span class="o">O</span>RA</div>
+    <div class="preloader-bar"></div>
   </div>
 
-  <!-- Cursor -->
+  <!-- Custom Cursor -->
   <div class="cursor-dot" id="cursorDot"></div>
   <div class="cursor-ring" id="cursorRing"></div>
 
   <!-- Navbar -->
   <nav class="navbar" id="navbar">
     <div class="inner">
-      <a href="#" class="logo">VAND<span class="o">O</span>RA</a>
-      <div class="nav-links" id="navLinks">
+      <a href="#" class="brand-logo">VAND<span class="o">O</span>RA</a>
+      <div class="nav-links">
         <a href="#hikaye">Hikaye</a>
         <a href="#urunler">Ürünler</a>
         <a href="#icerikler">İçerikler</a>
         <a href="#qr">QR Deneyimi</a>
-        <a href="https://www.instagram.com/vando.raa/" target="_blank" class="nav-cta">@vando.raa</a>
+        <a href="https://www.instagram.com/vando.raa/" target="_blank" class="nav-cta">Takip Et</a>
       </div>
       <button class="hamburger" id="hamburger" aria-label="Menü">
         <span></span><span></span><span></span>
@@ -847,191 +883,177 @@
   </nav>
 
   <!-- Hero -->
-  <section class="hero" id="hero">
+  <section class="hero">
     <div class="hero-orb hero-orb-1"></div>
     <div class="hero-orb hero-orb-2"></div>
     <div class="hero-orb hero-orb-3"></div>
-    <div class="container">
+    <div class="inner">
       <div class="hero-content">
-        <div class="hero-tag rv">
-          <span class="tag tag-pink">🌿 El Yapımı • 100% Doğal</span>
-        </div>
-        <h1 id="heroTitle">
-          <span class="line"><span class="line-inner">VAND<span class="o">O</span>RA</span></span>
-          <span class="line"><span class="line-inner" style="font-size:0.55em; font-weight:400; color:var(--muted); font-family:var(--font-body); letter-spacing:0;">Experience Snack Bar</span></span>
+        <div class="hero-badge reveal">El Yapımı &bull; %100 Doğal</div>
+        <h1 class="hero-title">
+          <span class="line">Doğanın</span>
+          <span class="line">Enerjisini</span>
+          <span class="line"><span class="pink">Keşfet.</span></span>
         </h1>
-        <p class="hero-desc rv d2">
-          İki mühendislik öğrencisinin mutfağından doğan, tamamen doğal içerikli el yapımı snack bar. Her barın içinde saf enerji var.
-        </p>
-        <div class="hero-buttons rv d3">
-          <a href="#urunler" class="btn btn-primary">Keşfet →</a>
-          <a href="#hikaye" class="btn btn-outline">Hikayemiz</a>
+        <p class="hero-desc reveal">İki mühendislik öğrencisinin mutfağından doğan VANDORA, her barında doğal malzemelerin gücünü sunuyor.</p>
+        <div class="hero-actions reveal">
+          <a href="#urunler" class="btn-primary">Ürünleri Keşfet →</a>
+          <a href="#hikaye" class="btn-outline">Hikayemiz</a>
         </div>
       </div>
-      <div class="hero-image rv d2">
-        <img src="images/hero-ai.jpg" alt="VANDORA Snack Bar" class="parallax-img" />
-        <span class="float-el">🫘</span>
-        <span class="float-el">🍯</span>
-        <span class="float-el">🌾</span>
-        <span class="float-el">🍫</span>
-        <span class="float-el">🥜</span>
-        <span class="float-el">🍇</span>
+      <div class="hero-visual">
+        <div class="hero-img-wrapper">
+          <img src="images/hero-light.jpg" alt="VANDORA Snack Bar" />
+          <span class="float-item">🫘</span>
+          <span class="float-item">🍯</span>
+          <span class="float-item">🌾</span>
+          <span class="float-item">🍫</span>
+          <span class="float-item">🥜</span>
+          <span class="float-item">🍇</span>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- Marquee -->
-  <div class="marquee-section">
-    <div class="marquee-track" id="marquee1">
-      <span class="marquee-item">VANDORA <span class="sep">✦</span> EL YAPIMI <span class="sep">✦</span> DOĞAL İÇERİK <span class="sep">✦</span> 40G SAF ENERJİ <span class="sep">✦</span> KATKI MADDESİZ <span class="sep">✦</span> VANDORA <span class="sep">✦</span> EL YAPIMI <span class="sep">✦</span> DOĞAL İÇERİK <span class="sep">✦</span> 40G SAF ENERJİ <span class="sep">✦</span> KATKI MADDESİZ <span class="sep">✦</span></span>
-      <span class="marquee-item">VANDORA <span class="sep">✦</span> EL YAPIMI <span class="sep">✦</span> DOĞAL İÇERİK <span class="sep">✦</span> 40G SAF ENERJİ <span class="sep">✦</span> KATKI MADDESİZ <span class="sep">✦</span> VANDORA <span class="sep">✦</span> EL YAPIMI <span class="sep">✦</span> DOĞAL İÇERİK <span class="sep">✦</span> 40G SAF ENERJİ <span class="sep">✦</span> KATKI MADDESİZ <span class="sep">✦</span></span>
+  <!-- Stats Strip -->
+  <div class="stats-strip">
+    <div class="inner">
+      <div class="stat-item reveal">
+        <div class="stat-num"><span class="accent" data-count="40">0</span>g</div>
+        <div class="stat-label">Saf Lezzet</div>
+      </div>
+      <div class="stat-item reveal">
+        <div class="stat-num" data-count="100">0</div>
+        <div class="stat-label">% Doğal İçerik</div>
+      </div>
+      <div class="stat-item reveal">
+        <div class="stat-num" data-count="0">0</div>
+        <div class="stat-label">Katkı Maddesi</div>
+      </div>
+      <div class="stat-item reveal">
+        <div class="stat-num"><span class="accent" data-count="2">0</span></div>
+        <div class="stat-label">Kurucu Mühendis</div>
+      </div>
     </div>
   </div>
 
-  <!-- Story / Hikaye -->
-  <section class="story section" id="hikaye">
-    <div class="container">
+  <!-- Marquee -->
+  <div class="marquee-section">
+    <div class="marquee-track">
+      <span class="marquee-item">VANDORA <span class="dot"></span> EL YAPIMI BAR <span class="dot"></span> DOĞAL İÇERİK <span class="dot"></span> EXPERIENCE SNACK BAR <span class="dot"></span> VANDORA <span class="dot"></span> EL YAPIMI BAR <span class="dot"></span> DOĞAL İÇERİK <span class="dot"></span> EXPERIENCE SNACK BAR <span class="dot"></span></span>
+      <span class="marquee-item">VANDORA <span class="dot"></span> EL YAPIMI BAR <span class="dot"></span> DOĞAL İÇERİK <span class="dot"></span> EXPERIENCE SNACK BAR <span class="dot"></span> VANDORA <span class="dot"></span> EL YAPIMI BAR <span class="dot"></span> DOĞAL İÇERİK <span class="dot"></span> EXPERIENCE SNACK BAR <span class="dot"></span></span>
+    </div>
+  </div>
+
+  <!-- Story -->
+  <section class="section story-section" id="hikaye">
+    <div class="inner">
       <div class="story-grid">
-        <div class="story-image rv">
-          <img src="images/vandora-1.jpg" alt="VANDORA ürünleri" class="parallax-img" />
+        <div class="story-img-wrapper reveal-left">
+          <img src="images/vandora-1.jpg" alt="VANDORA ürün standı" />
+          <div class="overlay-tag">📍 İstanbul, 2024</div>
         </div>
-        <div class="story-content">
-          <span class="tag tag-green rv">🎓 Hikayemiz</span>
-          <h2 class="rv d1">İki Mühendisin<br><em>Lezzetli</em> Hayali</h2>
-          <p class="story-text rv d2">
-            Üniversitenin mühendislik fakültesinde tanıştık. Sağlıklı atıştırmalık bulamayınca, laboratuvar yerine mutfağa girdik. Doğal malzemeler, sıfır katkı maddesi, tamamen el yapımı. VANDORA böyle doğdu — her bir barı kendi ellerimizle sarıyoruz.
-          </p>
-          <p class="story-text rv d3">
-            İsmimiz "Wander" + "Ora"dan geliyor — keşfet ve deneyimle. Her VANDORA barının arkasında bir QR kodu var: tara ve sürpriz deneyimi keşfet.
-          </p>
-          <div class="stats rv d4">
-            <div class="stat">
-              <div class="stat-num" data-count="40">0</div>
-              <div class="stat-label">gram / bar</div>
-            </div>
-            <div class="stat">
-              <div class="stat-num" data-count="100">0</div>
-              <div class="stat-label">% doğal</div>
-            </div>
-            <div class="stat">
-              <div class="stat-num" data-count="0">0</div>
-              <div class="stat-label">katkı maddesi</div>
-            </div>
+        <div class="story-text">
+          <div class="section-label reveal">✦ Hikayemiz</div>
+          <h2 class="section-title reveal">İki Mühendislik Öğrencisi,<br/>Bir Mutfak, Bir Hayal.</h2>
+          <p class="reveal">VANDORA, üniversite mutfağında başlayan bir tutkudan doğdu. <span class="highlight">İki kadın mühendislik öğrencisi</span>, sağlıklı atıştırmalık bulma sorununu kendi elleriyle çözdü.</p>
+          <p class="reveal">Her bar, özenle seçilmiş doğal malzemelerle, el yapımı olarak üretiliyor. Fabrika yok, katkı maddesi yok — sadece sevgiyle yapılan lezzet.</p>
+          <blockquote class="story-quote reveal">
+            "Doğanın sunduğu en iyi malzemeleri, en saf haliyle barlarımıza kattık."
+          </blockquote>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Products -->
+  <section class="section products-section" id="urunler">
+    <div class="inner">
+      <div class="section-label reveal">✦ Ürünlerimiz</div>
+      <h2 class="section-title reveal">Her Damağa Bir Lezzet.</h2>
+      <p class="section-desc reveal">Doğal içerikli, el yapımı barlarımızı keşfedin. Her biri 40g saf enerji.</p>
+      <div class="products-scroll">
+        <div class="product-card reveal-scale">
+          <div class="product-card-img">
+            <img src="images/vandora-2.jpg" alt="VANDORA Klasik" />
+          </div>
+          <div class="product-card-body">
+            <h3>Klasik Seri</h3>
+            <p>Yulaf, bal, badem ve bitter çikolata ile zenginleştirilmiş orijinal formülümüz.</p>
+            <span class="product-tag">En Popüler</span>
+          </div>
+        </div>
+        <div class="product-card reveal-scale">
+          <div class="product-card-img">
+            <img src="images/vandora-3.jpg" alt="VANDORA Mevsimlik" />
+          </div>
+          <div class="product-card-body">
+            <h3>Mevsimlik Özel</h3>
+            <p>Sezon meyveli, özel üretim limitli seri barlar. Her mevsim yeni bir sürpriz.</p>
+            <span class="product-tag">Limited Edition</span>
+          </div>
+        </div>
+        <div class="product-card reveal-scale">
+          <div class="product-card-img" style="background: var(--pink-soft);">
+            <img src="images/hero-light.jpg" alt="VANDORA Sevgililer Günü" />
+          </div>
+          <div class="product-card-body">
+            <h3>Sevgililer Günü</h3>
+            <p>Özel pembe ambalajlı, romantik hediye kutusu ile sunulan sevgi dolu lezzet.</p>
+            <span class="product-tag">💝 Özel Seri</span>
+          </div>
+        </div>
+        <div class="product-card reveal-scale">
+          <div class="product-card-img" style="background: var(--green-pale);">
+            <img src="images/ingredients-light.jpg" alt="VANDORA İçerik" />
+          </div>
+          <div class="product-card-body">
+            <h3>Mix Kutu</h3>
+            <p>Tüm çeşitlerimizden birer tane — keşif yolculuğuna en iyi başlangıç.</p>
+            <span class="product-tag">Keşfet</span>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Products / Ürünler -->
-  <section class="products section" id="urunler">
-    <div class="container">
-      <div class="products-header">
-        <span class="tag tag-pink rv">🍫 Koleksiyon</span>
-        <h2 class="rv d1">Her Anına Bir <em>Lezzet</em></h2>
-        <p class="subtitle rv d2">Her biri özenle hazırlanmış, tamamen doğal içerikli el yapımı barlar.</p>
-      </div>
-      <div class="products-grid">
-        <div class="product-card rv d1" data-tilt>
-          <div class="product-card-img">
-            <img src="images/vandora-2.jpg" alt="VANDORA Classic" />
-            <span class="product-flavor-tag">Klasik</span>
+  <!-- Ingredients -->
+  <section class="section ingredients-section" id="icerikler">
+    <div class="inner">
+      <div class="ingredients-grid">
+        <div>
+          <div class="section-label reveal">✦ İçeriklerimiz</div>
+          <h2 class="section-title reveal">Doğanın En İyisi,<br/>En Saf Haliyle.</h2>
+          <p class="section-desc reveal">Hiçbir katkı maddesi, koruyucu veya yapay tatlandırıcı kullanmıyoruz. Sadece doğa, sadece lezzet.</p>
+          <div class="ingredient-list">
+            <div class="ingredient-item reveal">
+              <div class="ingredient-icon">🌾</div>
+              <div><h4>Yulaf Ezmesi</h4><span>Tam tahıl enerjisi</span></div>
+            </div>
+            <div class="ingredient-item reveal">
+              <div class="ingredient-icon">🍯</div>
+              <div><h4>Doğal Bal</h4><span>Saf tatlılık</span></div>
+            </div>
+            <div class="ingredient-item reveal">
+              <div class="ingredient-icon">🥜</div>
+              <div><h4>Badem</h4><span>Protein kaynağı</span></div>
+            </div>
+            <div class="ingredient-item reveal">
+              <div class="ingredient-icon">🍫</div>
+              <div><h4>Bitter Çikolata</h4><span>%70 kakao</span></div>
+            </div>
+            <div class="ingredient-item reveal">
+              <div class="ingredient-icon">🍇</div>
+              <div><h4>Kuru Üzüm</h4><span>Doğal enerji</span></div>
+            </div>
+            <div class="ingredient-item reveal">
+              <div class="ingredient-icon">🫘</div>
+              <div><h4>Chia Tohumu</h4><span>Süper gıda</span></div>
+            </div>
           </div>
-          <h3>Classic Bar</h3>
-          <p>Yulaf, bal, badem ve bitter çikolata harmoni. Her güne enerji dolu bir başlangıç.</p>
-          <span class="price-tag">40G • EL YAPIMI</span>
         </div>
-        <div class="product-card rv d2" data-tilt>
-          <div class="product-card-img">
-            <img src="images/vandora-3.jpg" alt="VANDORA Berry" />
-            <span class="product-flavor-tag">Meyveli</span>
-          </div>
-          <h3>Berry Mix</h3>
-          <p>Kuru üzüm, kızılcık ve çilek parçaları ile tatlı-ekşi denge. Ferahlatıcı lezzet.</p>
-          <span class="price-tag">40G • EL YAPIMI</span>
-        </div>
-        <div class="product-card rv d3" data-tilt>
-          <div class="product-card-img">
-            <img src="images/vandora-1.jpg" alt="VANDORA Koleksiyon" />
-            <span class="product-flavor-tag">Koleksiyon</span>
-          </div>
-          <h3>Keşif Paketi</h3>
-          <p>Tüm çeşitler bir arada. Sevdiklerin için mükemmel hediye seçeneği.</p>
-          <span class="price-tag">3'LÜ PAKET • ÖZEL KUTU</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Ingredients / İçerikler -->
-  <section class="ingredients section" id="icerikler">
-    <div class="container">
-      <div class="ingredients-header">
-        <span class="tag tag-green rv">🌿 İçerikler</span>
-        <h2 class="rv d1">Doğadan,<br>Hiçbir <em>Katkı</em> Olmadan</h2>
-        <p class="subtitle rv d2">Her bir malzeme özenle seçiliyor. Ne koyduğumuzu biliyoruz — sen de bil.</p>
-      </div>
-      <div class="ingredients-visual">
-        <div class="ingredients-img rv">
-          <img src="images/ingredients-ai.jpg" alt="VANDORA malzemeleri" class="parallax-img" />
-        </div>
-        <div class="ingredient-list">
-          <div class="ingredient-item rv d1">
-            <div class="ingredient-icon">🌾</div>
-            <div>
-              <div class="ingredient-name">Yulaf Ezmesi</div>
-              <div class="ingredient-detail">Tam tahıl, lif kaynağı</div>
-            </div>
-          </div>
-          <div class="ingredient-item rv d2">
-            <div class="ingredient-icon">🍯</div>
-            <div>
-              <div class="ingredient-name">Doğal Bal</div>
-              <div class="ingredient-detail">Ham, süzme, katkısız</div>
-            </div>
-          </div>
-          <div class="ingredient-item rv d3">
-            <div class="ingredient-icon">🥜</div>
-            <div>
-              <div class="ingredient-name">Badem</div>
-              <div class="ingredient-detail">Protein & sağlıklı yağ</div>
-            </div>
-          </div>
-          <div class="ingredient-item rv d4">
-            <div class="ingredient-icon">🍫</div>
-            <div>
-              <div class="ingredient-name">Bitter Çikolata</div>
-              <div class="ingredient-detail">%70 kakao, antioksidan</div>
-            </div>
-          </div>
-          <div class="ingredient-item rv d5">
-            <div class="ingredient-icon">🍇</div>
-            <div>
-              <div class="ingredient-name">Kuru Üzüm</div>
-              <div class="ingredient-detail">Doğal tatlılık</div>
-            </div>
-          </div>
-          <div class="ingredient-item rv d1">
-            <div class="ingredient-icon">🫘</div>
-            <div>
-              <div class="ingredient-name">Chia Tohumu</div>
-              <div class="ingredient-detail">Omega-3, süper gıda</div>
-            </div>
-          </div>
-          <div class="ingredient-item rv d2">
-            <div class="ingredient-icon">🥥</div>
-            <div>
-              <div class="ingredient-name">Hindistan Cevizi</div>
-              <div class="ingredient-detail">MCT yağ, enerji</div>
-            </div>
-          </div>
-          <div class="ingredient-item rv d3">
-            <div class="ingredient-icon">🌰</div>
-            <div>
-              <div class="ingredient-name">Fıstık</div>
-              <div class="ingredient-detail">Protein deposu</div>
-            </div>
-          </div>
+        <div class="ingredients-img-wrapper reveal-right">
+          <img src="images/ingredients-light.jpg" alt="VANDORA doğal içerikler" />
         </div>
       </div>
     </div>
@@ -1040,45 +1062,54 @@
   <!-- Marquee 2 -->
   <div class="marquee-section" style="background: var(--pink);">
     <div class="marquee-track reverse">
-      <span class="marquee-item">EXPERIENCE SNACK BAR <span class="sep">✦</span> QR'I TARA <span class="sep">✦</span> SÜRPRİZİ BUL <span class="sep">✦</span> VANDORA <span class="sep">✦</span> EXPERIENCE SNACK BAR <span class="sep">✦</span> QR'I TARA <span class="sep">✦</span> SÜRPRİZİ BUL <span class="sep">✦</span> VANDORA <span class="sep">✦</span></span>
-      <span class="marquee-item">EXPERIENCE SNACK BAR <span class="sep">✦</span> QR'I TARA <span class="sep">✦</span> SÜRPRİZİ BUL <span class="sep">✦</span> VANDORA <span class="sep">✦</span> EXPERIENCE SNACK BAR <span class="sep">✦</span> QR'I TARA <span class="sep">✦</span> SÜRPRİZİ BUL <span class="sep">✦</span> VANDORA <span class="sep">✦</span></span>
+      <span class="marquee-item">KATKISIZ <span class="dot" style="background:var(--white)"></span> DOĞAL <span class="dot" style="background:var(--white)"></span> EL YAPIMI <span class="dot" style="background:var(--white)"></span> 40G SAF ENERJİ <span class="dot" style="background:var(--white)"></span> KATKISIZ <span class="dot" style="background:var(--white)"></span> DOĞAL <span class="dot" style="background:var(--white)"></span> EL YAPIMI <span class="dot" style="background:var(--white)"></span> 40G SAF ENERJİ <span class="dot" style="background:var(--white)"></span></span>
+      <span class="marquee-item">KATKISIZ <span class="dot" style="background:var(--white)"></span> DOĞAL <span class="dot" style="background:var(--white)"></span> EL YAPIMI <span class="dot" style="background:var(--white)"></span> 40G SAF ENERJİ <span class="dot" style="background:var(--white)"></span> KATKISIZ <span class="dot" style="background:var(--white)"></span> DOĞAL <span class="dot" style="background:var(--white)"></span> EL YAPIMI <span class="dot" style="background:var(--white)"></span> 40G SAF ENERJİ <span class="dot" style="background:var(--white)"></span></span>
     </div>
   </div>
 
-  <!-- QR Section -->
-  <section class="qr-section section" id="qr">
-    <div class="container">
+  <!-- QR Experience -->
+  <section class="section qr-section" id="qr">
+    <div class="inner">
       <div class="qr-grid">
         <div class="qr-content">
-          <span class="tag tag-pink rv">📱 Yeni Nesil Deneyim</span>
-          <h2 class="rv d1">Her Barda Bir<br><em>Sürpriz</em> Gizli</h2>
-          <p class="rv d2">Her VANDORA paketinin arkasında benzersiz bir QR kodu var. Tara ve sana özel deneyimi keşfet — tarif, playlist, ilham notu veya indirim kodu olabilir.</p>
+          <div class="section-label reveal">✦ QR Deneyimi</div>
+          <h2 class="section-title reveal">Her Pakette<br/>Bir Sürpriz.</h2>
+          <p class="section-desc reveal">VANDORA paketindeki QR kodu tara, özel içeriklere ve sürprizlere ulaş.</p>
           <ul class="qr-steps">
-            <li class="rv d2">
-              <span class="step-num">01</span>
-              <span class="step-text">Paketi aç, arkasındaki QR kodunu bul</span>
+            <li class="reveal">
+              <div>
+                <h4>Paketini Aç</h4>
+                <p>VANDORA barını al ve QR kodunu bul.</p>
+              </div>
             </li>
-            <li class="rv d3">
-              <span class="step-num">02</span>
-              <span class="step-text">Telefonunla tara — uygulama gerektirmez</span>
+            <li class="reveal">
+              <div>
+                <h4>QR'ı Tara</h4>
+                <p>Telefonunun kamerasıyla QR kodu tara.</p>
+              </div>
             </li>
-            <li class="rv d4">
-              <span class="step-num">03</span>
-              <span class="step-text">Sana özel sürpriz deneyimi keşfet</span>
+            <li class="reveal">
+              <div>
+                <h4>Sürprizi Keşfet</h4>
+                <p>Özel tarif, kurucu mesajı veya indirim fırsatı seni bekliyor.</p>
+              </div>
             </li>
           </ul>
         </div>
-        <div class="qr-phone rv d2">
+        <div class="qr-phone reveal-scale">
           <div class="phone-frame">
             <div class="phone-notch"></div>
             <div class="phone-screen">
-              <div class="scan-line"></div>
-              <div class="qr-box">
-                <div class="qr-placeholder"></div>
-                <div class="qr-glow"></div>
+              <div class="qr-art">
+                <span></span><span></span><span></span><span></span><span></span>
+                <span></span><span></span><span></span><span></span><span></span>
+                <span></span><span></span><span></span><span></span><span></span>
+                <span></span><span></span><span></span><span></span><span></span>
+                <span></span><span></span><span></span><span></span><span></span>
               </div>
-              <div class="qr-text">QR'ı Keşfet</div>
-              <div class="qr-sub">Her barda yeni bir sürpriz ✨</div>
+              <h5>VANDORA</h5>
+              <p>QR'ı tara, sürprizi bul ✨</p>
+              <div class="scan-line"></div>
             </div>
           </div>
         </div>
@@ -1086,47 +1117,61 @@
     </div>
   </section>
 
-  <!-- Instagram -->
-  <section class="ig-section section" id="instagram">
-    <div class="container">
-      <span class="tag tag-pink rv">📸 Instagram</span>
-      <h2 class="rv d1">Bizi <em>Takip</em> Et</h2>
-      <p class="subtitle rv d2">Yeni çeşitler, perde arkası ve daha fazlası için.</p>
+  <!-- Instagram CTA -->
+  <section class="section ig-section">
+    <div class="inner">
+      <div class="section-label reveal">✦ Bizi Takip Et</div>
+      <h2 class="section-title reveal" style="text-align:center;">@vando.raa</h2>
+      <p class="section-desc reveal" style="text-align:center;">Instagram'da VANDORA dünyasına katıl. Yeni ürünler, tarifler ve kurucu hikayelerinden haberdar ol.</p>
       <div class="ig-grid">
-        <div class="ig-item rv d1"><img src="images/vandora-1.jpg" alt="VANDORA" /></div>
-        <div class="ig-item rv d2"><img src="images/hero-ai.jpg" alt="VANDORA" /></div>
-        <div class="ig-item rv d3"><img src="images/vandora-2.jpg" alt="VANDORA" /></div>
-        <div class="ig-item rv d4"><img src="images/ingredients-ai.jpg" alt="VANDORA" /></div>
+        <div class="ig-item reveal-scale"><img src="images/vandora-1.jpg" alt="VANDORA" /></div>
+        <div class="ig-item reveal-scale"><img src="images/vandora-2.jpg" alt="VANDORA" /></div>
+        <div class="ig-item reveal-scale"><img src="images/hero-light.jpg" alt="VANDORA" /></div>
+        <div class="ig-item reveal-scale"><img src="images/ingredients-light.jpg" alt="VANDORA" /></div>
       </div>
-      <a href="https://www.instagram.com/vando.raa/" target="_blank" class="ig-handle rv">@vando.raa →</a>
+      <a href="https://www.instagram.com/vando.raa/" target="_blank" class="ig-follow reveal">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+        @vando.raa'yı Takip Et
+      </a>
     </div>
   </section>
 
   <!-- Footer -->
-  <footer>
-    <div class="container">
+  <footer class="footer">
+    <div class="inner">
       <div class="footer-grid">
-        <div>
-          <div class="footer-brand">VAND<span class="o">O</span>RA</div>
-          <p class="footer-desc">İki mühendislik öğrencisi tarafından sevgiyle üretilen, tamamen doğal el yapımı snack bar.</p>
+        <div class="footer-brand">
+          <a href="#" class="brand-logo">VAND<span class="o">O</span>RA</a>
+          <p>İki mühendislik öğrencisinin mutfağından doğan, doğal içerikli el yapımı snack bar.</p>
         </div>
         <div>
           <h4>Keşfet</h4>
-          <a href="#hikaye">Hikayemiz</a>
-          <a href="#urunler">Ürünler</a>
-          <a href="#icerikler">İçerikler</a>
-          <a href="#qr">QR Deneyimi</a>
+          <ul>
+            <li><a href="#hikaye">Hikayemiz</a></li>
+            <li><a href="#urunler">Ürünler</a></li>
+            <li><a href="#icerikler">İçerikler</a></li>
+            <li><a href="#qr">QR Deneyimi</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Takip Et</h4>
+          <ul>
+            <li><a href="https://www.instagram.com/vando.raa/" target="_blank">Instagram</a></li>
+            <li><a href="#">TikTok</a></li>
+            <li><a href="#">YouTube</a></li>
+          </ul>
         </div>
         <div>
           <h4>İletişim</h4>
-          <a href="https://www.instagram.com/vando.raa/" target="_blank">Instagram</a>
-          <a href="mailto:hello@vandora.co">hello@vandora.co</a>
-          <a href="#">İstanbul, Türkiye</a>
+          <ul>
+            <li><a href="mailto:info@vandora.co">info@vandora.co</a></li>
+            <li><a href="#">Sipariş</a></li>
+          </ul>
         </div>
       </div>
       <div class="footer-bottom">
-        <span>© 2026 VANDORA. Tüm hakları saklıdır.</span>
-        <span>İki mühendislik öğrencisi tarafından 💚 ile üretildi.</span>
+        <span>© 2024 VANDORA. Tüm hakları saklıdır.</span>
+        <span>Made with <span class="hearts">♥</span> by two engineers.</span>
       </div>
     </div>
   </footer>
@@ -1136,291 +1181,199 @@
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12/dist/ScrollTrigger.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/lenis@1.1/dist/lenis.min.js"></script>
   <script>
-    /* ═══════════════════════════════════════
-       VANDORA v7 — Interactive Engine
-       ═══════════════════════════════════════ */
+    /* ══════════════════════════════════════════════
+       VANDORA v7 — Interactive Script
+       ══════════════════════════════════════════════ */
 
     // ── Preloader ──
-    (function() {
-      const text = 'VANDORA';
-      const el = document.getElementById('preloaderText');
-      text.split('').forEach((char, i) => {
-        const span = document.createElement('span');
-        span.className = 'char' + (char === 'O' ? ' pink' : '');
-        span.textContent = char;
-        span.style.animationDelay = (i * 0.08) + 's';
-        el.appendChild(span);
-      });
-      window.addEventListener('load', () => {
-        setTimeout(() => {
-          document.getElementById('preloader').classList.add('done');
-          initAll();
-        }, 800);
-      });
-    })();
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        document.getElementById('preloader').classList.add('done');
+        initAnimations();
+      }, 1400);
+    });
 
-    function initAll() {
-      initLenis();
-      initCursor();
-      initNavbar();
-      initHeroAnim();
-      initScrollReveal();
-      initGSAP();
-      initTilt();
-      initCountUp();
-    }
-
-    // ── Lenis Smooth Scroll ──
-    let lenis;
-    function initLenis() {
-      lenis = new Lenis({
-        duration: 1.2,
-        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-        smoothWheel: true,
-      });
-      function raf(time) {
-        lenis.raf(time);
-        requestAnimationFrame(raf);
-      }
-      requestAnimationFrame(raf);
-      // Sync with GSAP ScrollTrigger
-      lenis.on('scroll', ScrollTrigger.update);
-      gsap.ticker.add((time) => lenis.raf(time * 1000));
-      gsap.ticker.lagSmoothing(0);
-    }
+    // ── Smooth Scroll (Lenis) ──
+    const lenis = new Lenis({ lerp: 0.08, smoothWheel: true });
+    function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
+    requestAnimationFrame(raf);
+    // Sync GSAP ScrollTrigger with Lenis
+    lenis.on('scroll', ScrollTrigger.update);
+    gsap.ticker.add((time) => lenis.raf(time * 1000));
+    gsap.ticker.lagSmoothing(0);
 
     // ── Custom Cursor ──
-    function initCursor() {
-      if (window.matchMedia('(hover: none)').matches) return;
-      const dot = document.getElementById('cursorDot');
-      const ring = document.getElementById('cursorRing');
-      let mx = 0, my = 0, rx = 0, ry = 0;
+    const dot = document.getElementById('cursorDot');
+    const ring = document.getElementById('cursorRing');
+    let mx = 0, my = 0, cx = 0, cy = 0, rx = 0, ry = 0;
 
-      document.addEventListener('mousemove', (e) => {
-        mx = e.clientX; my = e.clientY;
-        dot.style.transform = `translate(${mx - 4}px, ${my - 4}px)`;
-      });
+    document.addEventListener('mousemove', (e) => { mx = e.clientX; my = e.clientY; });
 
-      function animRing() {
-        rx += (mx - rx) * 0.12;
-        ry += (my - ry) * 0.12;
-        ring.style.transform = `translate(${rx - 20}px, ${ry - 20}px)`;
-        requestAnimationFrame(animRing);
-      }
-      animRing();
-
-      document.querySelectorAll('a, button, .product-card, .ig-item').forEach(el => {
-        el.addEventListener('mouseenter', () => ring.classList.add('active'));
-        el.addEventListener('mouseleave', () => ring.classList.remove('active'));
-      });
+    function animateCursor() {
+      cx += (mx - cx) * 0.2;
+      cy += (my - cy) * 0.2;
+      rx += (mx - rx) * 0.08;
+      ry += (my - ry) * 0.08;
+      if (dot) dot.style.transform = `translate(${cx - 4}px, ${cy - 4}px)`;
+      if (ring) ring.style.transform = `translate(${rx - 20}px, ${ry - 20}px)`;
+      requestAnimationFrame(animateCursor);
     }
+    animateCursor();
 
-    // ── Navbar ──
-    function initNavbar() {
-      const nav = document.getElementById('navbar');
-      const burger = document.getElementById('hamburger');
-      const links = document.getElementById('navLinks');
+    // Hover effect on interactive elements
+    document.querySelectorAll('a, button, .product-card, .ingredient-item').forEach(el => {
+      el.addEventListener('mouseenter', () => ring.classList.add('hover'));
+      el.addEventListener('mouseleave', () => ring.classList.remove('hover'));
+    });
 
-      window.addEventListener('scroll', () => {
-        nav.classList.toggle('scrolled', window.scrollY > 50);
+    // ── Navbar scroll ──
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 60);
+    });
+
+    // ── Smooth anchor scrolling ──
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', (e) => {
+        e.preventDefault();
+        const target = document.querySelector(a.getAttribute('href'));
+        if (target) lenis.scrollTo(target, { offset: -80 });
       });
+    });
 
-      burger.addEventListener('click', () => {
-        links.classList.toggle('open');
-      });
-
-      links.querySelectorAll('a').forEach(a => {
-        a.addEventListener('click', () => links.classList.remove('open'));
-      });
-    }
-
-    // ── Hero Text Animation ──
-    function initHeroAnim() {
-      gsap.to('.hero .line-inner', {
-        y: 0,
-        duration: 1,
-        ease: 'power3.out',
-        stagger: 0.15,
-        delay: 0.2,
-      });
-    }
-
-    // ── Scroll Reveal (IntersectionObserver) ──
-    function initScrollReveal() {
-      const obs = new IntersectionObserver((entries) => {
-        entries.forEach(e => {
-          if (e.isIntersecting) {
-            e.target.classList.add('vis');
-            obs.unobserve(e.target);
-          }
-        });
-      }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
-
-      document.querySelectorAll('.rv').forEach(el => obs.observe(el));
-    }
-
-    // ── GSAP ScrollTrigger Animations ──
-    function initGSAP() {
+    // ── GSAP Animations ──
+    function initAnimations() {
       gsap.registerPlugin(ScrollTrigger);
 
-      // Parallax images
-      document.querySelectorAll('.parallax-img').forEach(img => {
-        gsap.to(img, {
-          y: -40,
-          ease: 'none',
-          scrollTrigger: {
-            trigger: img.closest('section') || img.parentElement,
-            start: 'top bottom',
-            end: 'bottom top',
-            scrub: 1,
-          }
-        });
-      });
-
-      // Hero orbs parallax
-      gsap.to('.hero-orb-1', {
-        y: -80, x: -30,
-        scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: 1.5 }
-      });
-      gsap.to('.hero-orb-2', {
-        y: -50, x: 40,
-        scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: 1.5 }
-      });
-
-      // Floating emojis in hero — parallax
-      document.querySelectorAll('.float-el').forEach((el, i) => {
-        gsap.to(el, {
-          y: -60 - (i * 15),
-          rotation: 15 + (i * 5),
-          scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: 2 }
-        });
-      });
-
-      // Product cards staggered entrance
-      gsap.from('.product-card', {
-        y: 60,
-        opacity: 0,
-        duration: 0.8,
+      // Hero title lines
+      gsap.to('.hero-title .line', {
+        opacity: 1, y: 0,
+        duration: 0.9,
         stagger: 0.15,
         ease: 'power3.out',
-        scrollTrigger: {
-          trigger: '.products-grid',
-          start: 'top 80%',
-        }
+        delay: 0.2
       });
 
-      // Ingredient items stagger
-      gsap.from('.ingredient-item', {
-        x: -30,
-        opacity: 0,
-        duration: 0.6,
-        stagger: 0.08,
-        ease: 'power3.out',
-        scrollTrigger: {
-          trigger: '.ingredient-list',
-          start: 'top 80%',
-        }
-      });
-
-      // Stats section — pin while counting
-      gsap.from('.stat', {
-        scale: 0.8,
-        opacity: 0,
-        duration: 0.6,
-        stagger: 0.1,
-        ease: 'back.out(1.7)',
-        scrollTrigger: {
-          trigger: '.stats',
-          start: 'top 85%',
-        }
-      });
-
-      // QR phone entrance
-      gsap.from('.phone-frame', {
-        y: 80,
-        rotation: 5,
-        opacity: 0,
-        duration: 1,
-        ease: 'power3.out',
-        scrollTrigger: {
-          trigger: '.qr-phone',
-          start: 'top 80%',
-        }
-      });
-
-      // Instagram grid
-      gsap.from('.ig-item', {
-        scale: 0.9,
-        opacity: 0,
-        duration: 0.5,
-        stagger: 0.1,
-        ease: 'power3.out',
-        scrollTrigger: {
-          trigger: '.ig-grid',
-          start: 'top 80%',
-        }
-      });
-
-      // Marquee speed boost on scroll
-      document.querySelectorAll('.marquee-track').forEach(track => {
-        gsap.to(track, {
-          x: () => track.classList.contains('reverse') ? 100 : -100,
-          ease: 'none',
-          scrollTrigger: {
-            trigger: track.parentElement,
-            start: 'top bottom',
-            end: 'bottom top',
-            scrub: 2,
-          }
+      // Reveal on scroll
+      gsap.utils.toArray('.reveal').forEach(el => {
+        gsap.to(el, {
+          scrollTrigger: { trigger: el, start: 'top 88%', toggleActions: 'play none none none' },
+          opacity: 1, y: 0, duration: 0.8, ease: 'power3.out'
         });
       });
-    }
 
-    // ── 3D Tilt on Product Cards ──
-    function initTilt() {
-      if (window.matchMedia('(hover: none)').matches) return;
-      document.querySelectorAll('[data-tilt]').forEach(card => {
+      gsap.utils.toArray('.reveal-left').forEach(el => {
+        gsap.to(el, {
+          scrollTrigger: { trigger: el, start: 'top 88%', toggleActions: 'play none none none' },
+          opacity: 1, x: 0, duration: 0.9, ease: 'power3.out'
+        });
+      });
+
+      gsap.utils.toArray('.reveal-right').forEach(el => {
+        gsap.to(el, {
+          scrollTrigger: { trigger: el, start: 'top 88%', toggleActions: 'play none none none' },
+          opacity: 1, x: 0, duration: 0.9, ease: 'power3.out'
+        });
+      });
+
+      gsap.utils.toArray('.reveal-scale').forEach(el => {
+        gsap.to(el, {
+          scrollTrigger: { trigger: el, start: 'top 88%', toggleActions: 'play none none none' },
+          opacity: 1, scale: 1, duration: 0.8, ease: 'back.out(1.5)'
+        });
+      });
+
+      // Hero parallax orbs
+      gsap.to('.hero-orb-1', {
+        scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: 1 },
+        y: -120, x: 40
+      });
+      gsap.to('.hero-orb-2', {
+        scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: 1 },
+        y: -80, x: -30
+      });
+
+      // Hero image parallax
+      gsap.to('.hero-img-wrapper img', {
+        scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: 1 },
+        y: 60, scale: 0.95
+      });
+
+      // Stats counter animation
+      document.querySelectorAll('[data-count]').forEach(el => {
+        const target = parseInt(el.dataset.count);
+        gsap.to(el, {
+          scrollTrigger: { trigger: el, start: 'top 85%' },
+          innerText: target,
+          duration: 1.5,
+          snap: { innerText: 1 },
+          ease: 'power2.out'
+        });
+      });
+
+      // Product cards 3D tilt
+      document.querySelectorAll('.product-card').forEach(card => {
         card.addEventListener('mousemove', (e) => {
           const rect = card.getBoundingClientRect();
           const x = (e.clientX - rect.left) / rect.width - 0.5;
           const y = (e.clientY - rect.top) / rect.height - 0.5;
-          card.style.transform = `
-            translateY(-8px)
-            rotateX(${-y * 8}deg)
-            rotateY(${x * 8}deg)
-          `;
+          card.style.transform = `translateY(-8px) rotateY(${x * 8}deg) rotateX(${-y * 8}deg)`;
         });
         card.addEventListener('mouseleave', () => {
           card.style.transform = '';
         });
       });
-    }
 
-    // ── Count Up Animation ──
-    function initCountUp() {
-      const obs = new IntersectionObserver((entries) => {
-        entries.forEach(e => {
-          if (e.isIntersecting) {
-            const el = e.target;
-            const target = parseInt(el.dataset.count);
-            const suffix = el.dataset.count === '100' ? '%' : '';
-            let current = 0;
-            const step = target / 40;
-            const interval = setInterval(() => {
-              current += step;
-              if (current >= target) {
-                current = target;
-                clearInterval(interval);
-              }
-              el.textContent = Math.round(current) + suffix;
-            }, 25);
-            obs.unobserve(el);
-          }
+      // Story section parallax
+      gsap.to('.story-img-wrapper img', {
+        scrollTrigger: { trigger: '.story-section', start: 'top bottom', end: 'bottom top', scrub: 1 },
+        y: -30, scale: 1.05
+      });
+
+      // Ingredients stagger
+      gsap.utils.toArray('.ingredient-item').forEach((el, i) => {
+        gsap.to(el, {
+          scrollTrigger: { trigger: el, start: 'top 90%' },
+          opacity: 1, y: 0, duration: 0.6,
+          delay: i * 0.08,
+          ease: 'power3.out'
         });
-      }, { threshold: 0.5 });
+      });
 
-      document.querySelectorAll('[data-count]').forEach(el => obs.observe(el));
+      // QR phone float
+      gsap.to('.phone-frame', {
+        scrollTrigger: { trigger: '.qr-section', start: 'top bottom', end: 'bottom top', scrub: 1 },
+        y: -30
+      });
+
+      // IG grid stagger
+      gsap.utils.toArray('.ig-item').forEach((el, i) => {
+        gsap.to(el, {
+          scrollTrigger: { trigger: el, start: 'top 90%' },
+          opacity: 1, scale: 1, duration: 0.6,
+          delay: i * 0.1,
+          ease: 'back.out(1.3)'
+        });
+      });
     }
+
+    // ── Mobile hamburger ──
+    document.getElementById('hamburger')?.addEventListener('click', () => {
+      const nav = document.querySelector('.nav-links');
+      nav.style.display = nav.style.display === 'flex' ? 'none' : 'flex';
+      nav.style.position = 'fixed';
+      nav.style.top = '60px';
+      nav.style.left = '0';
+      nav.style.right = '0';
+      nav.style.flexDirection = 'column';
+      nav.style.background = 'rgba(255,255,255,0.98)';
+      nav.style.padding = '2rem';
+      nav.style.gap = '1.5rem';
+      nav.style.backdropFilter = 'blur(20px)';
+      nav.style.zIndex = '999';
+      nav.style.boxShadow = '0 10px 40px rgba(0,0,0,0.1)';
+      nav.style.borderRadius = '0 0 20px 20px';
+    });
   </script>
 </body>
 </html>
